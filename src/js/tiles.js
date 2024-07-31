@@ -31,6 +31,7 @@ export function GenerateTiles(width = 100, height = 10, grassLayer = 1) {
 
 
 // Render tiles with images
+let mostTimeTaken = 0;
 export function RenderTiles({ ctx }) {
     const start = Date.now();
     const tileZoomedSize = 20 * engine.zoom;
@@ -93,7 +94,12 @@ export function RenderTiles({ ctx }) {
     }
 
     const end = Date.now();
-    // console.log(`Rendering time: ${end - start} ms`);
+    const timeTaken = end - start 
+    if(timeTaken>mostTimeTaken){
+        mostTimeTaken = timeTaken
+        console.log("New most time taken for render is: "+mostTimeTaken+" ms")
+    }
+    // console.log(`Rendering time: ${timeTaken} ms`);
 }
 
 
