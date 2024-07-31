@@ -5,5 +5,6 @@ import { LivingEngine } from '../lib/engine.js'
 const canvas = document.getElementById("gameCanvas")
 
 // Code
-const engine = new LivingEngine(canvas)
+export const engine = new LivingEngine(canvas)
 engine.Render() // Starts render loop.
+
