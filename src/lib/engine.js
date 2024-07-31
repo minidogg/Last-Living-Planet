@@ -1,5 +1,5 @@
 export class LivingEngine {
-    constructor(canvas) {
+    constructor(canvas, tiles) {
         this.canvas = canvas;
         this.ctx = this.canvas.getContext("2d");
 
@@ -7,7 +7,7 @@ export class LivingEngine {
         this.camY = 0;
         this.zoom = 1;
 
-        // this.tiles = tiles;
+        this.tiles = tiles; // Store the tiles array
 
         this.onRender = [];
         this.sprite = {};
@@ -31,6 +31,7 @@ export class LivingEngine {
     }
 
     Render() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.handleInput();
         this.onRender.forEach((renderFunction) => {
             renderFunction({
@@ -106,7 +107,7 @@ export class LivingEngine {
         const tileX = Math.floor((canvasX - this.camX) / tileZoomedSize);
         const tileY = Math.floor((canvasY - this.camY) / tileZoomedSize);
 
-        if (tileX >= 0 && tileX < tiles[0].length && tileY >= 0 && tileY < tiles.length) {
+        if (tileX >= 0 && tileX < this.tiles[0].length && tileY >= 0 && tileY < this.tiles.length) {
             this.selectedTile.x = tileX;
             this.selectedTile.y = tileY;
         } else {
