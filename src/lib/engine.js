@@ -79,6 +79,14 @@ export class LivingEngine {
         window.addEventListener('keyup', (e) => {
             this.keysPressed[e.key] = false;
         });
+
+        const zoomSpeed = 2
+        window.addEventListener("wheel", (e)=>{
+            this.zoom += e.deltaY*-0.001*zoomSpeed;
+            this.camX += e.deltaY*0.25*zoomSpeed
+            this.camY += e.deltaY*0.25*zoomSpeed
+            console.log("sus")
+        })
     }
 
     handleInput() {
@@ -124,6 +132,7 @@ export class LivingEngine {
 
         console.log(`Selected tile: (${this.selectedTile.x}, ${this.selectedTile.y})`);
     }
+
 
     placeBuilding(buildingType, x, y ) {
         if (x === null || y === null) return;
