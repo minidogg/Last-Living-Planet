@@ -5,6 +5,7 @@ export class LivingEngine{
 
         this.camX = 0;
         this.camY = 0;
+        this.zoom = 1;
 
         this.onRender = [
 
@@ -22,13 +23,9 @@ export class LivingEngine{
     }
 
     Render(){
-        console.log("amog us")
         this.onRender.forEach((renderFunction)=>{
             renderFunction({
-                ctx: this.ctx,
-                engine: this,
-                camX: this.camX,
-                camY: this.camY
+                ctx: this.ctx
             })
         })
 
@@ -41,7 +38,7 @@ export class LivingEngine{
      * @param {*} key The name the sprite should be stored under. Not providing this param simply causes the sprite to not be saved.
      * @returns {Image} 
      */
-    async LoadSprite(url, key=undefined){
+    LoadSprite(url, key=undefined){
         let image = new Image()
         image.src = url
         
