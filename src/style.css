@@ -1,0 +1,7 @@
+body{
+    margin: 0;
+}
+.gameIframe{
+    width: 500px;
+    height: 500px;
+}

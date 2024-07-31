@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Last Living Planet</title>
+
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <iframe src="/game.html" class="gameIframe"></iframe>
+    <br>
+    <button id="fullscreen">Full Screen</button>
+
+    <script>
+        document.getElementById("fullscreen").addEventListener("click", function () {
+            document.querySelector(".gameIframe").requestFullscreen();
+        });
+    </script>
+</body>
+
+</html>
