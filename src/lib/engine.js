@@ -83,19 +83,26 @@ export class LivingEngine {
 
     handleInput() {
         const speed = 5;
-        if (this.keysPressed['w']) {
+        
+        // Normalize the keysPressed keys to lowercase
+        const normalizedKeys = Object.keys(this.keysPressed).reduce((acc, key) => {
+            acc[key.toLowerCase()] = this.keysPressed[key];
+            return acc;
+        }, {});
+    
+        if (normalizedKeys['w']) {
             this.camY += speed;
         }
-        if (this.keysPressed['s']) {
+        if (normalizedKeys['s']) {
             this.camY -= speed;
         }
-        if (this.keysPressed['a']) {
+        if (normalizedKeys['a']) {
             this.camX += speed;
         }
-        if (this.keysPressed['d']) {
+        if (normalizedKeys['d']) {
             this.camX -= speed;
         }
-    }
+    }    
 
     selectTile(clientX, clientY) {
         const rect = this.canvas.getBoundingClientRect();
