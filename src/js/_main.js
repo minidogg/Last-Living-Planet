@@ -1,8 +1,7 @@
 import { LivingEngine } from '../lib/engine.js';
 import { BackgroundRender } from './background.js';
 import * as TileSystem from './tiles.js';
-// import { buildings } from './buildings.js';
-
+import { buildings } from './buildings/index.js';
 // Constant Elements
 const canvas = document.getElementById("gameCanvas");
 
