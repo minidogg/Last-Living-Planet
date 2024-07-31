@@ -15,7 +15,7 @@ function loadTileImages() {
 }
 
 // Generate tiles with image types
-export function GenerateTiles(width = 100, height = 100) {
+export function GenerateTiles(width = 100, height = 10, grassLayer = 1) {
     tiles = [];
     for (let i1 = 0; i1 < height; i1++) {
         tiles.push([]);
@@ -28,6 +28,7 @@ export function GenerateTiles(width = 100, height = 100) {
     }
     console.log("Tiles generated:", tiles);
 }
+
 
 // Render tiles with images
 export function RenderTiles({ ctx }) {
@@ -56,7 +57,7 @@ export function RenderTiles({ ctx }) {
                     tileZoomedSize
                 );
             } else {
-                ctx.fillStyle = "#FFFFFF"; 
+                ctx.fillStyle = "#FFFFFF";
                 ctx.fillRect(
                     i2 * tileZoomedSize + engine.camX,
                     i1 * tileZoomedSize + engine.camY,
@@ -64,6 +65,20 @@ export function RenderTiles({ ctx }) {
                     tileZoomedSize
                 );
             }
+
+            if (tile.building) {
+                const buildingImg = engine.sprite[tile.building.sprite];
+                if (buildingImg) {
+                    ctx.drawImage(
+                        buildingImg,
+                        i2 * tileZoomedSize + engine.camX,
+                        i1 * tileZoomedSize + engine.camY,
+                        tileZoomedSize,
+                        tileZoomedSize
+                    );
+                }
+            }
+
             if (engine.selectedTile.x === i2 && engine.selectedTile.y === i1) {
                 ctx.strokeStyle = "red";
                 ctx.lineWidth = 2;
@@ -80,5 +95,6 @@ export function RenderTiles({ ctx }) {
     const end = Date.now();
     // console.log(`Rendering time: ${end - start} ms`);
 }
+
 
 loadTileImages();

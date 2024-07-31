@@ -26,8 +26,8 @@ export class LivingEngine {
     }
 
     ResizeCanvas() {
-        this.canvas.width = window.innerWidth * 0.99;
-        this.canvas.height = window.innerHeight * 0.99;
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
     }
 
     Render() {
@@ -116,6 +116,30 @@ export class LivingEngine {
         }
 
         console.log(`Selected tile: (${this.selectedTile.x}, ${this.selectedTile.y})`);
+    }
+
+    placeBuilding(buildingType) {
+        const { x, y } = this.selectedTile;
+        if (x === null || y === null) return;
+
+        if (this.canPlaceBuilding(x, y)) {
+            const building = buildings[buildingType];
+            if (building) {
+                this.tiles[y][x] = {
+                    type: buildingType,
+                    building: building
+                };
+            }
+        }
+    }
+
+    canPlaceBuilding(x, y) {
+        if (y === 0) return false; // Can't place on the top row
+        if (this.tiles[y][x].type !== 'grass') return false; // Can't place on non-grass tiles
+        if (this.tiles[y - 1][x].type === 'grass' || (x > 0 && this.tiles[y][x - 1].type === 'grass') || (x < this.tiles[0].length - 1 && this.tiles[y][x + 1].type === 'grass')) {
+            return true;
+        }
+        return false;
     }
 
     /**
