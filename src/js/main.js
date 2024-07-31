@@ -1,2 +1,8 @@
-console.log("Now we game all over the place.")
+// Imports
+import { LivingEngine } from '../lib/engine.js'
 
+// Constant Elements
+const canvas = document.getElementById("gameCanvas")
+
+// Code
+const engine = new LivingEngine(canvas)
