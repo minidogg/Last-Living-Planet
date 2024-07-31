@@ -11,24 +11,28 @@ export class LivingEngine{
         ]
         this.sprite = {}
 
-        this.LoadSprite("/assets/img/space.png")
 
         window.addEventListener("resize", ()=>{this.ResizeCanvas})
         this.ResizeCanvas()
     }
 
     ResizeCanvas(){
-        this.canvas.width = window.innerWidth*0.99893;
-        this.canvas.height = window.innerHeight*0.99893;
+        this.canvas.width = window.innerWidth*0.99;
+        this.canvas.height = window.innerHeight*0.99;
     }
 
     Render(){
+        console.log("amog us")
         this.onRender.forEach((renderFunction)=>{
-            renderFunction({ctx: this.ctx, engine: this, camX: this.camX, camY: this.camY})
-            renderFunction({ctx, engine: this, camX, camY})
+            renderFunction({
+                ctx: this.ctx,
+                engine: this,
+                camX: this.camX,
+                camY: this.camY
+            })
         })
 
-        requestAnimationFrame(()=>{this.Render})
+        window.requestAnimationFrame(()=>{this.Render()})
     }
 
     /**
