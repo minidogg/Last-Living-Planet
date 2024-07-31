@@ -5,7 +5,7 @@ export class LivingEngine {
 
         this.camX = 0;
         this.camY = 0;
-        this.zoom = 1;
+        this.zoom = 3;
 
         this.tiles = tiles; // Store the tiles array
 
@@ -125,8 +125,7 @@ export class LivingEngine {
         console.log(`Selected tile: (${this.selectedTile.x}, ${this.selectedTile.y})`);
     }
 
-    placeBuilding(buildingType) {
-        const { x, y } = this.selectedTile;
+    placeBuilding(buildingType, x, y ) {
         if (x === null || y === null) return;
 
         if (this.canPlaceBuilding(x, y)) {
@@ -138,6 +137,13 @@ export class LivingEngine {
                 };
             }
         }
+    }
+
+    placeBuildingAtSelected(buildingType) {
+        const { x, y } = this.selectedTile;
+        if (x === null || y === null) return;
+
+        this.placeBuilding(buildingType, x, y)
     }
 
     canPlaceBuilding(x, y) {

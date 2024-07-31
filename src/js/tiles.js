@@ -96,6 +96,7 @@ export function RenderTiles({ ctx }) {
     const end = Date.now();
     const timeTaken = end - start 
     if(timeTaken>mostTimeTaken){
+        console.log()
         mostTimeTaken = timeTaken
         console.log("New most time taken for render is: "+mostTimeTaken+" ms")
     }
