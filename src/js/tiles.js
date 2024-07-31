@@ -20,11 +20,18 @@ export function GenerateTiles(width = 100, height = 10, grassLayer = 1) {
     for (let i1 = 0; i1 < height; i1++) {
         tiles.push([]);
         for (let i2 = 0; i2 < width; i2++) {
-            const type = i2>62||i2<35?"void":(
-                i1>60&&64>i1?"stone":(
-                    i1>59&&61>i1?"grass":"void"
+            const type = i2==60?"grass":(
+                i2==61||i2==62?"stone":(
+                    (i2==63||i2==64)&&Math.random()>0.8?"stone":"void"
                 )
             );
+            // i2>62||i2<35?"void":(
+            //     i1==61||i1==62&&Math.random?"stone":(
+            //         i1==60?"grass":(
+            //             i1==63||i1==64&&Math.random()>0.8?"stone":"void"
+            //         )
+            //     )
+            // );
             tiles[i1].push({
                 type: type
             });
