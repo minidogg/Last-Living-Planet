@@ -1,8 +1,12 @@
 export class LivingEngine{
     constructor(canvas){
         this.canvas = canvas;
+        this.camX = 0;
+        this.camY = 0;
 
-        window.addEventListener("resize", this.ResizeCanvas)
+
+
+        window.addEventListener("resize", ()=>{this.ResizeCanvas})
         this.ResizeCanvas()
     }
 
