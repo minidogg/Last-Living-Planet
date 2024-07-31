@@ -20,9 +20,11 @@ export function GenerateTiles(width = 100, height = 10, grassLayer = 1) {
     for (let i1 = 0; i1 < height; i1++) {
         tiles.push([]);
         for (let i2 = 0; i2 < width; i2++) {
-            const type = i2==60?"grass":(
-                i2==61||i2==62?"stone":(
-                    (i2==63||i2==64)&&Math.random()>0.8?"stone":"void"
+            const type = i2>65||35>i2?"void":(
+                    i1==60?"grass":(
+                    i1==61||i1==62?"stone":(
+                        (i1==63||i1==64)&&Math.random()>0.8?"stone":"void"
+                    )
                 )
             );
             // i2>62||i2<35?"void":(
