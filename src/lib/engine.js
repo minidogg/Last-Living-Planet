@@ -141,7 +141,6 @@ export class LivingEngine {
 
     placeBuildingAtSelected(buildingType) {
         const { x, y } = this.selectedTile;
-        if (x === null || y === null) return;
 
         this.placeBuilding(buildingType, x, y)
     }
