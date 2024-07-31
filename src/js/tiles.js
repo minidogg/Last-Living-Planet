@@ -66,7 +66,7 @@ export function RenderTiles({ ctx }) {
             }
             if (engine.selectedTile.x === i2 && engine.selectedTile.y === i1) {
                 ctx.strokeStyle = "red";
-                ctx.lineWidth = 3;
+                ctx.lineWidth = 2;
                 ctx.strokeRect(
                     i2 * tileZoomedSize + engine.camX,
                     i1 * tileZoomedSize + engine.camY,
