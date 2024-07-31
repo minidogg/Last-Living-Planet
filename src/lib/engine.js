@@ -5,6 +5,7 @@ export class LivingEngine {
 
         this.camX = 0;
         this.camY = 0;
+        this.camMoveSpeed = 10;
 
         this.camZoom = 2;
         this.camZoomSpeed = 2
@@ -91,7 +92,6 @@ export class LivingEngine {
     }
 
     handleInput() {
-        const speed = 5;
         
         // Normalize the keysPressed keys to lowercase
         const normalizedKeys = Object.keys(this.keysPressed).reduce((acc, key) => {
@@ -100,16 +100,16 @@ export class LivingEngine {
         }, {});
     
         if (normalizedKeys['w']) {
-            this.camY += speed;
+            this.camY += this.camMoveSpeed;
         }
         if (normalizedKeys['s']) {
-            this.camY -= speed;
+            this.camY -= this.camMoveSpeed;
         }
         if (normalizedKeys['a']) {
-            this.camX += speed;
+            this.camX += this.camMoveSpeed;
         }
         if (normalizedKeys['d']) {
-            this.camX -= speed;
+            this.camX -= this.camMoveSpeed;
         }
     }    
 
