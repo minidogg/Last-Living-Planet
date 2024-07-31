@@ -34,7 +34,7 @@ export function GenerateTiles(width = 100, height = 10, grassLayer = 1) {
 let mostTimeTaken = 0;
 export function RenderTiles({ ctx }) {
     const start = Date.now();
-    const tileZoomedSize = 20 * engine.zoom;
+    const tileZoomedSize = 20 * engine.camZoom;
 
     const visibleTilesX = Math.ceil(ctx.canvas.width / tileZoomedSize);
     const visibleTilesY = Math.ceil(ctx.canvas.height / tileZoomedSize);

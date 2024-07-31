@@ -5,7 +5,9 @@ export class LivingEngine {
 
         this.camX = 0;
         this.camY = 0;
-        this.zoom = 2;
+
+        this.camZoom = 2;
+        this.camZoomSpeed = 2
 
         this.tiles = tiles; // Store the tiles array
 
@@ -80,11 +82,10 @@ export class LivingEngine {
             this.keysPressed[e.key] = false;
         });
 
-        const zoomSpeed = 2
         window.addEventListener("wheel", (e)=>{
-            this.zoom += e.deltaY*-0.001*zoomSpeed;
-            this.camX += e.deltaY*0.25*zoomSpeed
-            this.camY += e.deltaY*0.25*zoomSpeed
+            this.camZoom += e.deltaY*-0.001*this.camZoomSpeed;
+            this.camX += e.deltaY*0.25*this.camZoomSpeed
+            this.camY += e.deltaY*0.25*this.camZoomSpeed
             console.log("sus")
         })
     }
@@ -117,7 +118,7 @@ export class LivingEngine {
         const canvasX = clientX - rect.left;
         const canvasY = clientY - rect.top;
 
-        const tileZoomedSize = 20 * this.zoom;
+        const tileZoomedSize = 20 * this.camZoom;
 
         const tileX = Math.floor((canvasX - this.camX) / tileZoomedSize);
         const tileY = Math.floor((canvasY - this.camY) / tileZoomedSize);
