@@ -18,7 +18,7 @@ engine.onRender.push(BackgroundRender);
 // Tiles
 engine.onRender.push(TileSystem.RenderTiles);
 
-engine.LoadSprite('/assets/img/house.png', 'house');
+engine.LoadSprite('/assets/img/house.jpg', 'house');
 
 window.placeBuilding = function (buildingType) {
     engine.placeBuilding(buildingType);

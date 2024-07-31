@@ -5,7 +5,7 @@ export class LivingEngine {
 
         this.camX = 0;
         this.camY = 0;
-        this.zoom = 3;
+        this.zoom = 2;
 
         this.tiles = tiles; // Store the tiles array
 
