@@ -7,6 +7,11 @@ import * as TileSystem from './tiles.js'
 const canvas = document.getElementById("gameCanvas")
 
 // Code
+
+// Render tiles for passing
+TileSystem.GenerateTiles() 
+
+// Do stuff
 export const engine = new LivingEngine(canvas, TileSystem.tiles)
 engine.Render() // Starts render loop.
 
@@ -14,5 +19,4 @@ engine.Render() // Starts render loop.
 engine.onRender.push(BackgroundRender)
 
 // Tiles
-TileSystem.GenerateTiles()
 engine.onRender.push(TileSystem.RenderTiles)
