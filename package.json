@@ -1,0 +1,22 @@
+{
+  "name": "last-living-planet",
+  "version": "1.0.0",
+  "description": "Not at all a fan remake of The Final Earth 2. Trust me bro.",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "lint": "npx eslint --fix ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "http-server": "^14.1.1",
+    "nodemon": "^3.1.4"
+  },
+  "devDependencies": {
+    "eslint": "^9.8.0",
+    "globals": "^15.8.0"
+  }
+}
