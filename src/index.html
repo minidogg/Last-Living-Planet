@@ -10,9 +10,36 @@
 </head>
 
 <body>
-    <iframe src="/game.html" class="gameIframe"></iframe>
-    <br>
-    <button id="fullscreen">Full Screen</button>
+    <header>
+        <h1>Last Living Planet</h1>
+    </header>
+
+    <main>
+        <section class="game-section">
+            <iframe src="/game.html" class="gameIframe"></iframe>
+            <br>
+            <button id="fullscreen">Full Screen</button>
+        </section>
+
+        <section class="description">
+            <h2>About the Game</h2>
+            <p>Last Living Planet is an exciting web game where you navigate through the last habitable planet in the galaxy. Explore, survive, and thrive!</p>
+        </section>
+
+        <section class="screenshots">
+            <h2>Screenshots</h2>
+            <img src="/images/screenshot1.png" alt="Screenshot 1" class="screenshot">
+            <img src="/images/screenshot2.png" alt="Screenshot 2" class="screenshot">
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Last Living Planet. All rights reserved.</p>
+        <nav>
+            <a href="/about.html">About</a>
+            <a href="/contact.html">Contact</a>
+        </nav>
+    </footer>
 
     <script>
         document.getElementById("fullscreen").addEventListener("click", function () {
