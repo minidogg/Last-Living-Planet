@@ -7,7 +7,7 @@ export class LivingEngine{
     }
 
     ResizeCanvas(){
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
+        this.canvas.width = window.innerWidth*0.99893;
+        this.canvas.height = window.innerHeight*0.99893;
     }
 }
