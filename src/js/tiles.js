@@ -104,10 +104,13 @@ export function RenderTiles({ ctx }) {
                     tileZoomedSize
                 );
             }
+            
+            // If the tile type is void all other rendering steps are skipped to optimize rendering speeds.
             if(tile.type=="void")continue;
             const img = tileImages[tile.type];
 
 
+            // If the tile has an image, draw it
             if (img) {
                 ctx.drawImage(
                     img,
@@ -116,6 +119,7 @@ export function RenderTiles({ ctx }) {
                     tileZoomedSize,
                     tileZoomedSize
                 );
+            // If the tile doesn't have an image, draw a white box.
             } else {
                 ctx.fillStyle = "#FFFFFF";
                 ctx.fillRect(
@@ -126,18 +130,19 @@ export function RenderTiles({ ctx }) {
                 );
             }
 
-            if (tile.building) {
-                const buildingImg = engine.sprite[tile.building.sprite];
-                if (buildingImg) {
-                    ctx.drawImage(
-                        buildingImg,
-                        i2 * tileZoomedSize + engine.camX,
-                        i1 * tileZoomedSize + engine.camY,
-                        tileZoomedSize,
-                        tileZoomedSize
-                    );
-                }
-            }
+            // ? This code serves no purpose because its the same as the already existing tile rendering, just with some fancy extras.
+            // if (tile.building) {
+            //     const buildingImg = engine.sprite[tile.building.sprite];
+            //     if (buildingImg) {
+            //         ctx.drawImage(
+            //             buildingImg,
+            //             i2 * tileZoomedSize + engine.camX,
+            //             i1 * tileZoomedSize + engine.camY,
+            //             tileZoomedSize,
+            //             tileZoomedSize
+            //         );
+            //     }
+            // }
 
 
         }
