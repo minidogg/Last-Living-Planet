@@ -16,6 +16,16 @@ function UIVarUpdater(){
     SquareSizeInner = SquareSize*0.75
 }
 
+function IsPointInRect(px, py, rx1, ry1, rx2, ry2){
+    return (
+        px >= Math.min(rx1, rx2) &&
+        px <= Math.max(rx1, rx2) &&
+        py >= Math.min(ry1, ry2) &&
+        py <= Math.max(ry1, ry2)
+
+    )
+}
+
 function TileSelectUI({ctx}){
     for(let i = 0;i<tileTypes.length;i++){
         let tileType = tileTypes[i]
@@ -25,6 +35,9 @@ function TileSelectUI({ctx}){
 
         ctx.drawImage(TileSelectBack, x, y, SquareSize,SquareSize)
         ctx.drawImage(tileImages[tileType.id], x+SquareSize/8.5, y+SquareSize/8.5, SquareSizeInner, SquareSizeInner)
-    }
 
+        if(IsPointInRect(engine.mouse.x, engine.mouse.y, x, y, x+SquareSize, y+SquareSize)){
+            console.log("Mouse is touching item "+i)
+        }
+    }
 }

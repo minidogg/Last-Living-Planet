@@ -16,8 +16,15 @@ export class LivingEngine {
         this.sprite = {};
 
         this.isDragging = false;
+        this.mouse = {
+            x: 0,
+            y: 0,
+            down: false,
+            button: 0
+        }
         this.lastMouseX = 0;
         this.lastMouseY = 0;
+
         this.keysPressed = {};
 
         this.longestRenderTime = 2;
@@ -58,8 +65,18 @@ export class LivingEngine {
         window.requestAnimationFrame(() => { this.Render() });
     }
 
+    updateMouse(event){
+        this.mouse = {
+            x: event.clientX,
+            y: event.clientY,
+            down: event.type=="mousedown",
+            button: event.button
+        }
+    }
     setupInputListeners() {
         this.canvas.addEventListener('mousedown', (e) => {
+            this.updateMouse(e)
+
             if (e.button === 2) { // Right mouse button
                 this.isDragging = true;
                 this.lastMouseX = e.clientX;
@@ -70,6 +87,8 @@ export class LivingEngine {
         });
 
         window.addEventListener('mousemove', (e) => {
+            this.updateMouse(e)
+
             if (this.isDragging) {
                 const dx = e.clientX - this.lastMouseX;
                 const dy = e.clientY - this.lastMouseY;
@@ -83,6 +102,8 @@ export class LivingEngine {
         });
 
         window.addEventListener('mouseup', (e) => {
+            this.updateMouse(e)
+            
             if (e.button === 2) { // Right mouse button
                 this.isDragging = false;
             }
