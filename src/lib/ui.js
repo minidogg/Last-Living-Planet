@@ -28,7 +28,6 @@ function IsPointInRect(px, py, rx1, ry1, rx2, ry2){
         px <= Math.max(rx1, rx2) &&
         py >= Math.min(ry1, ry2) &&
         py <= Math.max(ry1, ry2)
-
     )
 }
 
@@ -82,16 +81,19 @@ function ResourceDisplayUI({ctx}){
     let y = engine.canvas.height-height;
 
     drawOutlineRect(ctx, x, y, width, height)
-    if(IsPointInRect(engine.mouse.x,engine.mouse.y,x,y,x+width,y+width)){
+    if(IsPointInRect(engine.mouse.x,engine.mouse.y,x,y,x+width,y+height)){
         engine.inUI = true;
     }
 
     for(let i = 0;i<Object.keys(resources).length;i++){
         let resource = resources[Object.keys(resources)[i]]
-        ctx.fillStyle = "white";
-        ctx.font = (SquareSize/3)+"px Arial"
-        ctx.fillText(resource.name+" x"+resource.value, x+SquareSizeInner/2+5, y+SquareSize/1.4*(i+1), SquareSize*4)
-        ctx.drawImage(resource.image, x, y+SquareSize/2.4*(i+1), SquareSizeInner/2, SquareSizeInner/2)
+        let resourceY = y + SquareSize * 0.6 * i + 10;
 
+        drawOutlineRect(ctx, x + 10, resourceY, width - 20, SquareSize * 0.5)
+        
+        ctx.drawImage(resource.image, x + 20, resourceY + 5, SquareSize * 0.4, SquareSize * 0.4)
+        ctx.fillStyle = "white";
+        ctx.font = (SquareSize / 3) + "px Arial";
+        ctx.fillText(resource.name + " x" + resource.value, x + 30 + SquareSize * 0.4, resourceY + SquareSize * 0.35);
     }
 }
