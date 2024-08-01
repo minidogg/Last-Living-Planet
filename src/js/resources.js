@@ -6,7 +6,7 @@ class Resource{
         this.id = id;
         this.name = name;
         this.description = description;
-        this.startingValue = startingValue;
+        this.value = startingValue;
         this.image = new Image()
         this.image.src = "/assets/img/"+image
     }

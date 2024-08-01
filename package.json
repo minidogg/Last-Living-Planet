@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon app.js",
-    "lint": "npx eslint --fix ."
+    "lint": "npx eslint --fix .",
+    "httpserver": "http-server -c-1 -p 3000"
   },
   "keywords": [],
   "author": "",

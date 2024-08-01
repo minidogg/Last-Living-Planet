@@ -2,6 +2,7 @@ import {engine} from '../js/_main.js'
 import { tileTypes, tileImages } from '../js/tiles.js'
 import { TileTypeCategories } from '../js/tiletype.js';
 import { isDev } from './utils.js';
+import { resources } from '../js/resources.js';
 
 let UIBack;
 export function StartUIRender(){
@@ -9,6 +10,7 @@ export function StartUIRender(){
 
     engine.onRender.push(UIVarUpdater) // This should always be first.
     engine.onRender.push(TileSelectUI)
+    engine.onRender.push(ResourceDisplayUI)
 }
 
 let SquareSize = 0;
@@ -19,6 +21,7 @@ function UIVarUpdater(){
     engine.inUI = false;
 }
 
+// Is Point
 function IsPointInRect(px, py, rx1, ry1, rx2, ry2){
     return (
         px >= Math.min(rx1, rx2) &&
@@ -69,5 +72,26 @@ function TileSelectUI({ctx}){
         ctx.fillStyle = "white";
         ctx.font = (SquareSize/2.5)+"px Arial"
         ctx.fillText(tileCategory.name, engine.mouse.x, engine.mouse.y+SquareSize/2.4, SquareSize*4)
+    }
+}
+
+function ResourceDisplayUI({ctx}){
+    let width = SquareSize*4;
+    let height = engine.canvas.height/2.2
+    let x = engine.canvas.width-width;
+    let y = engine.canvas.height-height;
+
+    drawOutlineRect(ctx, x, y, width, height)
+    if(IsPointInRect(engine.mouse.x,engine.mouse.y,x,y,x+width,y+width)){
+        engine.inUI = true;
+    }
+
+    for(let i = 0;i<Object.keys(resources).length;i++){
+        let resource = resources[Object.keys(resources)[i]]
+        ctx.fillStyle = "white";
+        ctx.font = (SquareSize/3)+"px Arial"
+        ctx.fillText(resource.name+" x"+resource.value, x+SquareSizeInner/2+5, y+SquareSize/1.4*(i+1), SquareSize*4)
+        ctx.drawImage(resource.image, x, y+SquareSize/2.4*(i+1), SquareSizeInner/2, SquareSizeInner/2)
+
     }
 }
