@@ -1,43 +1,21 @@
 import { engine } from "./_main.js";
+import { buildings } from "./buildings/buildings.js";
+import { tile } from "./buildings/house/index.js";
+import { TileType } from "./tiletype.js";
 
 export let tiles = [];
 export const tileImages = {};
 
-export class TileTypeCategory{
-    constructor({id, name=id, image="tiles/placeholder1.png", visible = true}) {
-        this.id = id;
-        this.name = name; 
-        this.image = new Image(20,20)
-        this.image.src = `../assets/img/${image}`;
-        this.visible = visible;
-        
-        this.tiles = []
-    }
-}
-export const TileTypeCategories = [
-    new TileTypeCategory({id:"none", name:"None", visible:false}),
-    new TileTypeCategory({id:"housing", name:"Housing", visible:true, image:"category/housing.png"}),
-]
 
-export class TileType{
-    constructor({id, name=id, description=name, category="none"}){
-        this.id = id;
-        this.name = name;
-        this.description = description;
 
-        this.category = TileTypeCategories.find(e=>e.id==category)
-        this.category.tiles.push(this)
-    }
-}
 
 /**
  * @type {Array<TileType>}
  */
 export const tileTypes = [
     new TileType({id: "grass"}),
-    new TileType({id: "stone"}),
-    new TileType({id:"house", name:"Basic House", category:"housing"})
-];
+    new TileType({id: "stone"})
+].concat(buildings);
 
 // Load tile images
 function loadTileImages() {

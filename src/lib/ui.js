@@ -1,5 +1,6 @@
 import {engine} from '../js/_main.js'
-import { tileTypes, tileImages, TileTypeCategories, TileTypeCategory } from '../js/tiles.js'
+import { tileTypes, tileImages } from '../js/tiles.js'
+import { TileTypeCategories } from '../js/tiletype.js';
 import { isDev } from './utils.js';
 
 let UIBack;

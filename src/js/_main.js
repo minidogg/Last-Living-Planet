@@ -1,7 +1,7 @@
 import { LivingEngine } from '../lib/engine.js';
 import { BackgroundRender } from './background.js';
+import { buildings } from "./buildings/buildings.js";
 import * as TileSystem from './tiles.js';
-import { buildings } from './buildings/index.js';
 import { StartUIRender } from '../lib/ui.js';
 
 // Constant Elements
