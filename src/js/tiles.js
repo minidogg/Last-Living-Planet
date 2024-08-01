@@ -93,18 +93,6 @@ export function RenderTiles({ ctx }) {
             // Get the tile
             const tile = tiles[i1][i2];
 
-            // Check if the tile is the selected one
-            if (engine.selectedTile.x === i2 && engine.selectedTile.y === i1) {
-                ctx.strokeStyle = "red";
-                ctx.lineWidth = 2;
-                ctx.strokeRect(
-                    i2 * tileZoomedSize + engine.camX,
-                    i1 * tileZoomedSize + engine.camY,
-                    tileZoomedSize,
-                    tileZoomedSize
-                );
-            }
-            
             // If the tile type is void all other rendering steps are skipped to optimize rendering speeds.
             if(tile.type=="void")continue;
             const img = tileImages[tile.type];
@@ -147,6 +135,17 @@ export function RenderTiles({ ctx }) {
 
         }
     }
+
+    // Render the selected tile outline
+    ctx.strokeStyle = "red";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(
+        engine.selectedTile.x * tileZoomedSize + engine.camX,
+        engine.selectedTile.x * tileZoomedSize + engine.camY,
+        tileZoomedSize,
+        tileZoomedSize
+    );
+                
 }
 
 
