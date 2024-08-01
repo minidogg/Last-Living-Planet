@@ -10,5 +10,5 @@ let backgroundImg = undefined;
 export function BackgroundRender({ctx}){
     if(backgroundImg==undefined)backgroundImg = engine.LoadSprite("/assets/img/space.png", "backgroundPlaceholder")
     ctx.drawImage(backgroundImg, 0, -100, backgroundImg.width*1.8, backgroundImg.height*1.8)
-    ctx.drawImage(backgroundImg, 0, -100, backgroundImg.width*1.8, backgroundImg.height*1.8)
+    ctx.drawImage(backgroundImg, backgroundImg.width*1.8, -100, backgroundImg.width*1.8, backgroundImg.height*1.8)
 }
