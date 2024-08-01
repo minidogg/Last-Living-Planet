@@ -6,15 +6,16 @@ import { TileType } from "./tiletype.js";
 export let tiles = [];
 export const tileImages = {};
 
-
-
-
 /**
  * @type {Array<TileType>}
  */
 export const tileTypes = [
-    new TileType({id: "grass"}),
-    new TileType({id: "stone"})
+    new TileType({
+        id: "grass"
+    }),
+    new TileType({
+        id: "stone"
+    })
 ].concat(buildings);
 
 // Load tile images
@@ -30,16 +31,19 @@ loadTileImages();
 
 
 // Generate tiles with image types
-const homePos = {x:51, y:65}
+const homePos = {
+    x: 51,
+    y: 65
+}
 export function GenerateTiles(width = 100, height = 10, grassLayer = 1) {
     tiles = [];
     for (let i1 = 0; i1 < height; i1++) {
         tiles.push([]);
         for (let i2 = 0; i2 < width; i2++) {
-            const type = i2>65||35>i2?"void":(
-                    i1==60?"grass":(
-                    i1==61||i1==62?"stone":(
-                        (i1==63||i1==64)&&Math.random()>0.8?"stone":"void"
+            const type = i2 > 65 || 35 > i2 ? "void" : (
+                i1 == 60 ? "grass" : (
+                    i1 == 61 || i1 == 62 ? "stone" : (
+                        (i1 == 63 || i1 == 64) && Math.random() > 0.8 ? "stone" : "void"
                     )
                 )
             );
@@ -54,7 +58,9 @@ export function GenerateTiles(width = 100, height = 10, grassLayer = 1) {
 
 
 // Render tiles with images
-export function RenderTiles({ ctx }) {
+export function RenderTiles({
+    ctx
+}) {
     const tileZoomedSize = 20 * engine.camZoom;
 
     const visibleTilesX = Math.ceil(ctx.canvas.width / tileZoomedSize);
@@ -71,9 +77,9 @@ export function RenderTiles({ ctx }) {
             // Get the tile
             const tile = tiles[i1][i2];
 
-            
+
             // If the tile type is void all other rendering steps are skipped to optimize rendering speeds.
-            if(tile.type=="void")continue;
+            if (tile.type == "void") continue;
             const img = tileImages[tile.type];
 
 
@@ -86,7 +92,7 @@ export function RenderTiles({ ctx }) {
                     tileZoomedSize,
                     tileZoomedSize
                 );
-            // If the tile doesn't have an image, draw a white box.
+                // If the tile doesn't have an image, draw a white box.
             } else {
                 ctx.fillStyle = "#FFFFFF";
                 ctx.fillRect(
@@ -128,10 +134,10 @@ export function RenderTiles({ ctx }) {
 
 
 
-export function PositionCameraAtHome(){
+export function PositionCameraAtHome() {
     const tileZoomedSize = -20 * engine.camZoom;
 
-    engine.camX = (homePos.x-20)*tileZoomedSize;
-    engine.camY = (homePos.y-15)*tileZoomedSize;
-    
+    engine.camX = (homePos.x - 20) * tileZoomedSize;
+    engine.camY = (homePos.y - 15) * tileZoomedSize;
+
 }
