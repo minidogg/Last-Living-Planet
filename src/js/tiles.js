@@ -4,15 +4,16 @@ export let tiles = [];
 export const tileImages = {};
 
 export class TileTypeCategory{
-    constructor({id, name=id, image="placeholder1.png"}) {
+    constructor({id, name=id, image="placeholder1.png", visible = true}) {
         this.id = id;
         this.name = name; 
         this.image = new Image(20,20)
-        this.image.src = `../assets/img/tiles/${image}.png`;
+        this.image.src = `../assets/img/tiles/${image}`;
+        this.visible = visible;
     }
 }
-const TileTypeCategories = [
-    new TileTypeCategory("none")
+export const TileTypeCategories = [
+    new TileTypeCategory({id:"none", name:"None", visible:false})
 ]
 
 export class TileType{

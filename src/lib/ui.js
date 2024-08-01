@@ -1,9 +1,9 @@
 import {engine} from '../js/_main.js'
-import { tileTypes, tileImages } from '../js/tiles.js'
+import { tileTypes, tileImages, TileTypeCategories, TileTypeCategory } from '../js/tiles.js'
 
-let TileSelectBack;
+let UIBack;
 export function StartUIRender(){
-    TileSelectBack = engine.LoadSprite(`../assets/img/tiles/placeholder2.png`)
+    UIBack = engine.LoadSprite(`../assets/img/uiback.png`)
 
     engine.onRender.push(TileSelectUI)
     engine.onRender.push(UIVarUpdater)
@@ -26,18 +26,32 @@ function IsPointInRect(px, py, rx1, ry1, rx2, ry2){
     )
 }
 
+function drawOutlineSquare(ctx, x, y, width, height, fill = "#282828", outline = "#8a8a8a", outlineWidth = 2){
+    ctx.fillStyle = outline
+    ctx.fillRect(x-outlineWidth, y-outlineWidth, width+outlineWidth, height+outlineWidth)
+    ctx.fillStyle = fill
+    ctx.fillRect(x, y, width, height)
+}
+
+let selectedTileCategory = 0;
 function TileSelectUI({ctx}){
-    for(let i = 0;i<tileTypes.length;i++){
-        let tileType = tileTypes[i]
+    for(let i = 0;i<TileTypeCategories.length;i++){
+        let tileCategory = TileTypeCategories[i]
 
         let x = 10+(SquareSize+10)*i;
         let y = engine.canvas.height-SquareSize-10
 
-        ctx.drawImage(TileSelectBack, x, y, SquareSize,SquareSize)
-        ctx.drawImage(tileImages[tileType.id], x+SquareSize/8.5, y+SquareSize/8.5, SquareSizeInner, SquareSizeInner)
+        ctx.drawImage(UIBack, x, y, SquareSize,SquareSize)
+        ctx.drawImage(tileCategory.image, x+SquareSize/8.5, y+SquareSize/8.5, SquareSizeInner, SquareSizeInner)
 
         if(IsPointInRect(engine.mouse.x, engine.mouse.y, x, y, x+SquareSize, y+SquareSize)){
-            console.log("Mouse is touching item "+i)
+            selectedTileCategory = i;
+            drawOutlineSquare(ctx, engine.mouse.x, engine.mouse.y, SquareSize*4, SquareSize/2)
+
+            ctx.fillStyle = "white";
+            ctx.font = (SquareSize/2.5)+"px Arial"
+            ctx.fillText(tileCategory.name, engine.mouse.x, engine.mouse.y+SquareSize/2.4, SquareSize*4)
         }
     }
+
 }

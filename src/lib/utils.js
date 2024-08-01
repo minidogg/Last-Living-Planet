@@ -29,3 +29,6 @@ function debounce(func, delay) {
     };
 }
 
+function isDev(){
+    return localStorage.getItem("dev")=="dev"
+}
