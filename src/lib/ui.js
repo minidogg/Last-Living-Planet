@@ -64,12 +64,27 @@ function TileSelectUI({ctx}){
     // TODO: Render the tiles from the selected category.
     let selectedX = 10+(SquareSize+10)*selectedCategoryI;
     let selectedY = engine.canvas.height-SquareSize-10  
+    let hoverTile = -1;
     for(let i = 0;i<selectedCategory.tiles.length;i++){
         let tileType = selectedCategory.tiles[i]
         let y = selectedY+-SquareSize*(i+1)-10;
 
         drawOutlineRect(ctx, selectedX, y, SquareSize, SquareSize)
         ctx.drawImage(tileImages[tileType.id], selectedX+SquareSize/8.5, y+SquareSize/8.5, SquareSizeInner, SquareSizeInner)
+        if(IsPointInRect(engine.mouse.x, engine.mouse.y, selectedX, y, selectedX+SquareSize, y+SquareSize)){
+            engine.inUI = true;
+            hoverTile = i
+            console.log(i)
+        }
+    }
+    if(hoverTile!=-1){
+        let tileType = selectedCategory.tiles[hoverTile];
+
+        drawOutlineRect(ctx, engine.mouse.x, engine.mouse.y-SquareSize*10, SquareSize*8, SquareSize*10)
+
+        ctx.fillStyle = "white";
+        ctx.font = (SquareSize/2.5)+"px Arial"
+        ctx.fillText(tileType.name, engine.mouse.x, engine.mouse.y-SquareSize*10+(SquareSize/2.5), SquareSize*8)
     }
 
     // Render the category tooltips.

@@ -6,7 +6,7 @@ class Resource {
         id,
         name = id,
         description = name,
-        startValue: startingValue = 0,
+        startingValue = 0,
         image = "tiles/placeholder1.png"
     }) {
         this.id = id;
