@@ -7,3 +7,5 @@ export const tile = new TileType({
     description: "Just a basic 4 people house. Nothing fancy.",
     category: "housing"
 })
+
+export default tile;

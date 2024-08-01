@@ -1,6 +1,6 @@
 import { LivingEngine } from '../lib/engine/main.js';
 import { BackgroundRender } from './background.js';
-import { buildings } from "./buildings/buildings.js";
+import { buildings } from "./buildings/index.js";
 import * as TileSystem from './tiles.js';
 import { StartUIRender } from '../lib/ui.js';
 
@@ -18,6 +18,9 @@ engine.Tick() // Starts tick loop.
 // Tiles
 engine.LoadSprite('/assets/img/house.jpg', 'house');
 TileSystem.PositionCameraAtHome()
+
+// Test
+console.log(buildings)
 
 
 // On Render Stuff
