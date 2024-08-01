@@ -34,13 +34,15 @@ function IsPointInRect(px, py, rx1, ry1, rx2, ry2){
 
 function drawOutlineRect(ctx, x, y, width, height, fill = "#282828", outline = "#8a8a8a", outlineWidth = 2){
     ctx.fillStyle = outline
-    ctx.fillRect(x-outlineWidth, y-outlineWidth, width+outlineWidth, height+outlineWidth)
+    ctx.fillRect(x-outlineWidth, y-outlineWidth, width+outlineWidth*2, height+outlineWidth*2)
     ctx.fillStyle = fill
     ctx.fillRect(x, y, width, height)
 }
 
-let selectedTileCategory = 0;
+
 let FilteredCategories = TileTypeCategories.filter(e=>e.visible==true||isDev==true) 
+let selectedCategoryI = 0;
+let selectedCategory = FilteredCategories[selectedCategoryI]
 function TileSelectUI({ctx}){
     let hoverTileCategory = -1;
     // Render the category select Ui
@@ -54,13 +56,16 @@ function TileSelectUI({ctx}){
         ctx.drawImage(tileCategory.image, x+SquareSize/8.5, y+SquareSize/8.5, SquareSizeInner, SquareSizeInner)
 
         if(IsPointInRect(engine.mouse.x, engine.mouse.y, x, y, x+SquareSize, y+SquareSize)){
-            selectedTileCategory = i;
+            selectedCategoryI = i;
+            FilteredCategories[selectedCategoryI]
             hoverTileCategory = i;
         }
     }
 
     // TODO: Render the tiles from the selected category.
+    for(let i = 0;i<selectedCategoryI;i++){
 
+    }
 
     // Render the category tooltips.
     if(hoverTileCategory!=-1){
