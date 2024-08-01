@@ -27,13 +27,7 @@ export function GenerateTiles(width = 100, height = 10, grassLayer = 1) {
                     )
                 )
             );
-            // i2>62||i2<35?"void":(
-            //     i1==61||i1==62&&Math.random?"stone":(
-            //         i1==60?"grass":(
-            //             i1==63||i1==64&&Math.random()>0.8?"stone":"void"
-            //         )
-            //     )
-            // );
+
             tiles[i1].push({
                 type: type
             });
@@ -63,6 +57,8 @@ export function RenderTiles({ ctx }) {
             const tile = tiles[i1][i2];
             if(tile.type=="void")continue;
             const img = tileImages[tile.type];
+
+
             if (img) {
                 ctx.drawImage(
                     img,
@@ -104,6 +100,7 @@ export function RenderTiles({ ctx }) {
                     tileZoomedSize
                 );
             }
+
         }
     }
 
