@@ -2,6 +2,8 @@ import { LivingEngine } from '../lib/engine.js';
 import { BackgroundRender } from './background.js';
 import * as TileSystem from './tiles.js';
 import { buildings } from './buildings/index.js';
+import { StartUIRender } from '../lib/ui.js';
+
 // Constant Elements
 const canvas = document.getElementById("gameCanvas");
 
@@ -12,14 +14,17 @@ TileSystem.GenerateTiles(100, 100);
 export const engine = new LivingEngine(canvas, TileSystem.tiles);
 engine.Render(); // Starts render loop.
 
-// Background 
-engine.onRender.push(BackgroundRender);
 
 // Tiles
-engine.onRender.push(TileSystem.RenderTiles);
-
 engine.LoadSprite('/assets/img/house.jpg', 'house');
 
 window.placeBuilding = function (buildingType) {
     engine.placeBuilding(buildingType);
 };
+
+
+// On Render Stuff
+engine.onRender.push(BackgroundRender); // Background Rendering
+engine.onRender.push(TileSystem.RenderTiles); // Tile Rendering
+
+StartUIRender() // UI Rendering. THIS SHOULD ALWAYS BE LAST, otherwise the UI will be hidden under something.
