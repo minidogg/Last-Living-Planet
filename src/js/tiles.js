@@ -52,7 +52,7 @@ loadTileImages();
 
 
 // Generate tiles with image types
-const homePos = {x:51, y:60}
+const homePos = {x:51, y:65}
 export function GenerateTiles(width = 100, height = 10, grassLayer = 1) {
     tiles = [];
     for (let i1 = 0; i1 < height; i1++) {
