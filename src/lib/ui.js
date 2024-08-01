@@ -6,8 +6,8 @@ let UIBack;
 export function StartUIRender(){
     UIBack = engine.LoadSprite(`../assets/img/uiback.png`)
 
+    engine.onRender.push(UIVarUpdater) // This should always be first.
     engine.onRender.push(TileSelectUI)
-    engine.onRender.push(UIVarUpdater)
 }
 
 let SquareSize = 0;
@@ -15,6 +15,7 @@ let SquareSizeInner = 0;
 function UIVarUpdater(){
     SquareSize = (window.innerWidth+window.innerHeight)/2*0.05
     SquareSizeInner = SquareSize*0.75
+    engine.inUI = false;
 }
 
 function IsPointInRect(px, py, rx1, ry1, rx2, ry2){
@@ -55,10 +56,11 @@ function TileSelectUI({ctx}){
     }
 
     // TODO: Render the tiles from the selected category.
-    
+
 
     // Render the category tooltips.
     if(hoverTileCategory!=-1){
+        engine.inUI = true;
         let tileCategory = FilteredCategories[hoverTileCategory]
 
         drawOutlineSquare(ctx, engine.mouse.x, engine.mouse.y, SquareSize*4, SquareSize/2)

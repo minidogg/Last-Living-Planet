@@ -25,6 +25,8 @@ export class LivingEngine {
         this.lastMouseX = 0;
         this.lastMouseY = 0;
 
+        this.inUI = false;
+
         this.keysPressed = {};
 
         this.longestRenderTime = 2;
@@ -77,6 +79,7 @@ export class LivingEngine {
         this.canvas.addEventListener('mousedown', (e) => {
             this.updateMouse(e)
 
+            if(this.inUI==true)return;
             if (e.button === 2) { // Right mouse button
                 this.isDragging = true;
                 this.lastMouseX = e.clientX;
@@ -89,6 +92,7 @@ export class LivingEngine {
         window.addEventListener('mousemove', (e) => {
             this.updateMouse(e)
 
+            if(this.inUI==true)return;
             if (this.isDragging) {
                 const dx = e.clientX - this.lastMouseX;
                 const dy = e.clientY - this.lastMouseY;
@@ -104,6 +108,7 @@ export class LivingEngine {
         window.addEventListener('mouseup', (e) => {
             this.updateMouse(e)
             
+            if(this.inUI==true)return;
             if (e.button === 2) { // Right mouse button
                 this.isDragging = false;
             }
@@ -118,6 +123,7 @@ export class LivingEngine {
         });
 
         window.addEventListener("wheel", (e)=>{
+            if(this.inUI==true)return;
             this.camZoom += e.deltaY*-0.001*this.camZoomSpeed;
             this.camX += e.deltaY*0.25*this.camZoomSpeed
             this.camY += e.deltaY*0.25*this.camZoomSpeed
@@ -125,7 +131,8 @@ export class LivingEngine {
     }
 
     handleInput() {
-        
+        if(this.inUI==true)return;
+
         // Normalize the keysPressed keys to lowercase
         const normalizedKeys = Object.keys(this.keysPressed).reduce((acc, key) => {
             acc[key.toLowerCase()] = this.keysPressed[key];
