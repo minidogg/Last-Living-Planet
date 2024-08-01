@@ -5,5 +5,9 @@ export const tile = new TileType({
     id: "house",
     name: "Basic House",
     description: "Just a basic 4 people house. Nothing fancy.",
-    category: "housing"
+    category: "housing",
+    resources: {
+        wood: 4,
+        stone: 4
+    }
 })
