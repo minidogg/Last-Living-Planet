@@ -61,6 +61,7 @@ export function RenderTiles({ ctx }) {
     for (let i1 = startY; i1 < endY; i1++) {
         for (let i2 = startX; i2 < endX; i2++) {
             const tile = tiles[i1][i2];
+            if(tile.type=="void")continue;
             const img = tileImages[tile.type];
             if (img) {
                 ctx.drawImage(
