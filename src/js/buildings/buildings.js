@@ -1,6 +1,7 @@
-let buildings = []
+let buildings = [];
 
-import * as house from './house/index.js'
-buildings.push(house)
+const addBuilding = (building) => {
+  buildings.push(building);
+};
 
-export {buildings}
+export { buildings, addBuilding };

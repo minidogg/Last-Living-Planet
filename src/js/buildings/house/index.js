@@ -11,3 +11,5 @@ export const tile = new TileType({
         stone: 4
     }
 })
+
+export default tile;
