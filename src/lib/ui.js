@@ -1,5 +1,6 @@
 import {engine} from '../js/_main.js'
 import { tileTypes, tileImages, TileTypeCategories, TileTypeCategory } from '../js/tiles.js'
+import { isDev } from './utils.js';
 
 let UIBack;
 export function StartUIRender(){
@@ -34,9 +35,11 @@ function drawOutlineSquare(ctx, x, y, width, height, fill = "#282828", outline =
 }
 
 let selectedTileCategory = 0;
+let FilteredCategories = TileTypeCategories.filter(e=>e.visible==true||isDev==true) 
 function TileSelectUI({ctx}){
-    for(let i = 0;i<TileTypeCategories.length;i++){
-        let tileCategory = TileTypeCategories[i]
+    let hoverTileCategory = -1;
+    for(let i = 0;i<FilteredCategories.length;i++){
+        let tileCategory = FilteredCategories[i]
 
         let x = 10+(SquareSize+10)*i;
         let y = engine.canvas.height-SquareSize-10
@@ -46,12 +49,16 @@ function TileSelectUI({ctx}){
 
         if(IsPointInRect(engine.mouse.x, engine.mouse.y, x, y, x+SquareSize, y+SquareSize)){
             selectedTileCategory = i;
-            drawOutlineSquare(ctx, engine.mouse.x, engine.mouse.y, SquareSize*4, SquareSize/2)
-
-            ctx.fillStyle = "white";
-            ctx.font = (SquareSize/2.5)+"px Arial"
-            ctx.fillText(tileCategory.name, engine.mouse.x, engine.mouse.y+SquareSize/2.4, SquareSize*4)
+            hoverTileCategory = i;
         }
     }
+    if(hoverTileCategory!=-1){
+        let tileCategory = FilteredCategories[hoverTileCategory]
 
+        drawOutlineSquare(ctx, engine.mouse.x, engine.mouse.y, SquareSize*4, SquareSize/2)
+
+        ctx.fillStyle = "white";
+        ctx.font = (SquareSize/2.5)+"px Arial"
+        ctx.fillText(tileCategory.name, engine.mouse.x, engine.mouse.y+SquareSize/2.4, SquareSize*4)
+    }
 }

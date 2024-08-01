@@ -13,7 +13,8 @@ export class TileTypeCategory{
     }
 }
 export const TileTypeCategories = [
-    new TileTypeCategory({id:"none", name:"None", visible:false})
+    new TileTypeCategory({id:"none", name:"None", visible:false}),
+    new TileTypeCategory({id:"housing", name:"Housing", visible:true}),
 ]
 
 export class TileType{
@@ -29,7 +30,8 @@ export class TileType{
  */
 export const tileTypes = [
     new TileType({id: "grass"}),
-    new TileType({id: "stone"})
+    new TileType({id: "stone"}),
+    new TileType({id:"house", name:"Basic House", category:"housing"})
 ];
 
 // Load tile images
