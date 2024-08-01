@@ -12,6 +12,9 @@ export class LivingEngine {
 
         this.tiles = tiles; // Store the tiles array
 
+        this.onTick = [];
+        this.tickSpeed = 20; // tick speed in ms.
+
         this.onRender = [];
         this.sprite = {};
 
@@ -61,10 +64,21 @@ export class LivingEngine {
             console.log()
             this.longestRenderTime = timeTaken
             console.warn("New most time taken for render is: "+this.longestRenderTime+" ms")
+            // ? Do note that the render times can sometime be influenced by outside factors like the tick functions.
         }
         // console.log(`Rendering time: ${timeTaken} ms`);
 
         window.requestAnimationFrame(() => { this.Render() });
+    }
+
+    Tick() {
+        this.onTick.forEach((tickFunction) => {
+            renderFunction({
+                ctx: this.ctx
+            });
+        });
+
+        setTimeout(()=>{this.Tick()}, this.tickSpeed)
     }
 
     updateMouse(event){

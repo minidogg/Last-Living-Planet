@@ -13,7 +13,7 @@ TileSystem.GenerateTiles(100, 100);
 // Initialize Engine
 export const engine = new LivingEngine(canvas, TileSystem.tiles);
 engine.Render(); // Starts render loop.
-
+engine.Tick() // Starts tick loop.
 
 // Tiles
 engine.LoadSprite('/assets/img/house.jpg', 'house');
