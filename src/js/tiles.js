@@ -10,6 +10,8 @@ export class TileTypeCategory{
         this.image = new Image(20,20)
         this.image.src = `../assets/img/tiles/${image}`;
         this.visible = visible;
+        
+        this.tiles = []
     }
 }
 export const TileTypeCategories = [
@@ -22,6 +24,9 @@ export class TileType{
         this.id = id;
         this.name = name;
         this.description = description;
+
+        this.category = TileTypeCategories.find(e=>e.id==category)
+        this.category.tiles.push(this)
     }
 }
 
@@ -43,8 +48,11 @@ function loadTileImages() {
         tileImages[type.id] = img;
     });
 }
+loadTileImages();
+
 
 // Generate tiles with image types
+const homePos = {x:51, y:60}
 export function GenerateTiles(width = 100, height = 10, grassLayer = 1) {
     tiles = [];
     for (let i1 = 0; i1 < height; i1++) {
@@ -82,7 +90,20 @@ export function RenderTiles({ ctx }) {
 
     for (let i1 = startY; i1 < endY; i1++) {
         for (let i2 = startX; i2 < endX; i2++) {
+            // Get the tile
             const tile = tiles[i1][i2];
+
+            // Check if the tile is the selected one
+            if (engine.selectedTile.x === i2 && engine.selectedTile.y === i1) {
+                ctx.strokeStyle = "red";
+                ctx.lineWidth = 2;
+                ctx.strokeRect(
+                    i2 * tileZoomedSize + engine.camX,
+                    i1 * tileZoomedSize + engine.camY,
+                    tileZoomedSize,
+                    tileZoomedSize
+                );
+            }
             if(tile.type=="void")continue;
             const img = tileImages[tile.type];
 
@@ -118,20 +139,17 @@ export function RenderTiles({ ctx }) {
                 }
             }
 
-            if (engine.selectedTile.x === i2 && engine.selectedTile.y === i1) {
-                ctx.strokeStyle = "red";
-                ctx.lineWidth = 2;
-                ctx.strokeRect(
-                    i2 * tileZoomedSize + engine.camX,
-                    i1 * tileZoomedSize + engine.camY,
-                    tileZoomedSize,
-                    tileZoomedSize
-                );
-            }
 
         }
     }
 }
 
 
-loadTileImages();
+
+export function PositionCameraAtHome(){
+    const tileZoomedSize = -20 * engine.camZoom;
+
+    engine.camX = (homePos.x-20)*tileZoomedSize;
+    engine.camY = (homePos.y-15)*tileZoomedSize;
+    
+}

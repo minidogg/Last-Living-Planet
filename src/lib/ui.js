@@ -38,6 +38,7 @@ let selectedTileCategory = 0;
 let FilteredCategories = TileTypeCategories.filter(e=>e.visible==true||isDev==true) 
 function TileSelectUI({ctx}){
     let hoverTileCategory = -1;
+    // Render the category select Ui
     for(let i = 0;i<FilteredCategories.length;i++){
         let tileCategory = FilteredCategories[i]
 
@@ -52,6 +53,11 @@ function TileSelectUI({ctx}){
             hoverTileCategory = i;
         }
     }
+
+    // TODO: Render the tiles from the selected category.
+    
+
+    // Render the category tooltips.
     if(hoverTileCategory!=-1){
         let tileCategory = FilteredCategories[hoverTileCategory]
 

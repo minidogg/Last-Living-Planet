@@ -17,10 +17,7 @@ engine.Render(); // Starts render loop.
 
 // Tiles
 engine.LoadSprite('/assets/img/house.jpg', 'house');
-
-window.placeBuilding = function (buildingType) {
-    engine.placeBuilding(buildingType);
-};
+TileSystem.PositionCameraAtHome()
 
 
 // On Render Stuff

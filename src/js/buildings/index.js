@@ -1,3 +1,5 @@
+// TODO: Change this to implement the TileType class from tiles.js that house/index.js and all future tiles will use.
+
 /**
  * Scans the buildings directory and dynamically imports building modules.
  * @returns {Promise<Object[]>} Array of building info objects.
