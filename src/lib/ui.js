@@ -56,14 +56,20 @@ function TileSelectUI({ctx}){
 
         if(IsPointInRect(engine.mouse.x, engine.mouse.y, x, y, x+SquareSize, y+SquareSize)){
             selectedCategoryI = i;
-            FilteredCategories[selectedCategoryI]
+            selectedCategory = FilteredCategories[selectedCategoryI]
             hoverTileCategory = i;
         }
     }
 
     // TODO: Render the tiles from the selected category.
-    for(let i = 0;i<selectedCategoryI;i++){
+    let selectedX = 10+(SquareSize+10)*selectedCategoryI;
+    let selectedY = engine.canvas.height-SquareSize-10  
+    for(let i = 0;i<selectedCategory.tiles.length;i++){
+        let tileType = selectedCategory.tiles[i]
+        let y = selectedY+-SquareSize*(i+1)-10;
 
+        drawOutlineRect(ctx, selectedX, y, SquareSize, SquareSize)
+        ctx.drawImage(tileImages[tileType.id], selectedX+SquareSize/8.5, y+SquareSize/8.5, SquareSizeInner, SquareSizeInner)
     }
 
     // Render the category tooltips.
