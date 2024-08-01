@@ -29,7 +29,7 @@ function IsPointInRect(px, py, rx1, ry1, rx2, ry2){
     )
 }
 
-function drawOutlineSquare(ctx, x, y, width, height, fill = "#282828", outline = "#8a8a8a", outlineWidth = 2){
+function drawOutlineRect(ctx, x, y, width, height, fill = "#282828", outline = "#8a8a8a", outlineWidth = 2){
     ctx.fillStyle = outline
     ctx.fillRect(x-outlineWidth, y-outlineWidth, width+outlineWidth, height+outlineWidth)
     ctx.fillStyle = fill
@@ -64,7 +64,7 @@ function TileSelectUI({ctx}){
         engine.inUI = true;
         let tileCategory = FilteredCategories[hoverTileCategory]
 
-        drawOutlineSquare(ctx, engine.mouse.x, engine.mouse.y, SquareSize*4, SquareSize/2)
+        drawOutlineRect(ctx, engine.mouse.x, engine.mouse.y, SquareSize*4, SquareSize/2)
 
         ctx.fillStyle = "white";
         ctx.font = (SquareSize/2.5)+"px Arial"
