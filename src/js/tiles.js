@@ -1,16 +1,43 @@
 import { engine } from "./_main.js";
 
 export let tiles = [];
-const tileImages = {};
+export const tileImages = {};
+
+export class TileTypeCategory{
+    constructor({id, name=id, image="placeholder1.png"}) {
+        this.id = id;
+        this.name = name; 
+        this.image = new Image(20,20)
+        this.image.src = `../assets/img/tiles/${image}.png`;
+    }
+}
+const TileTypeCategories = [
+    new TileTypeCategory("none")
+]
+
+export class TileType{
+    constructor({id, name=id, description=name, category="none"}){
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
+}
+
+/**
+ * @type {Array<TileType>}
+ */
+export const tileTypes = [
+    new TileType({id: "grass"}),
+    new TileType({id: "stone"})
+];
 
 // Load tile images
 function loadTileImages() {
     // List your tile images here
-    const tileTypes = ['stone', 'grass'];
     tileTypes.forEach(type => {
         const img = new Image();
-        img.src = `../assets/img/tiles/${type}.png`; 
-        tileImages[type] = img;
+        img.src = `../assets/img/tiles/${type.id}.png`;
+        tileImages[type.id] = img;
     });
 }
 
@@ -38,9 +65,7 @@ export function GenerateTiles(width = 100, height = 10, grassLayer = 1) {
 
 
 // Render tiles with images
-let mostTimeTaken = 0;
 export function RenderTiles({ ctx }) {
-    const start = Date.now();
     const tileZoomedSize = 20 * engine.camZoom;
 
     const visibleTilesX = Math.ceil(ctx.canvas.width / tileZoomedSize);
@@ -103,15 +128,6 @@ export function RenderTiles({ ctx }) {
 
         }
     }
-
-    const end = Date.now();
-    const timeTaken = end - start 
-    if(timeTaken>mostTimeTaken){
-        console.log()
-        mostTimeTaken = timeTaken
-        console.log("New most time taken for render is: "+mostTimeTaken+" ms")
-    }
-    // console.log(`Rendering time: ${timeTaken} ms`);
 }
 
 

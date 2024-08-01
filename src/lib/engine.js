@@ -20,6 +20,8 @@ export class LivingEngine {
         this.lastMouseY = 0;
         this.keysPressed = {};
 
+        this.longestRenderTime = 2;
+
         this.selectedTile = { x: null, y: null };
 
         window.addEventListener("resize", () => { this.ResizeCanvas() });
@@ -34,6 +36,8 @@ export class LivingEngine {
     }
 
     Render() {
+        const start = Date.now();
+
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.handleInput();
         this.onRender.forEach((renderFunction) => {
@@ -41,6 +45,15 @@ export class LivingEngine {
                 ctx: this.ctx
             });
         });
+
+        const end = Date.now();
+        const timeTaken = end - start 
+        if(timeTaken>this.longestRenderTime){
+            console.log()
+            this.longestRenderTime = timeTaken
+            console.warn("New most time taken for render is: "+this.longestRenderTime+" ms")
+        }
+        // console.log(`Rendering time: ${timeTaken} ms`);
 
         window.requestAnimationFrame(() => { this.Render() });
     }
