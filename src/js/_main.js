@@ -1,4 +1,4 @@
-import { LivingEngine } from '../lib/engine.js';
+import { LivingEngine } from '../lib/engine/main.js';
 import { BackgroundRender } from './background.js';
 import * as TileSystem from './tiles.js';
 import { buildings } from './buildings/index.js';
