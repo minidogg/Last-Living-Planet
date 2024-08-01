@@ -29,4 +29,4 @@ function debounce(func, delay) {
     };
 }
 
-export const isDev = localStorage.getItem("dev")=="dev";
+export const isDev = localStorage.getItem("dev") == "dev";
