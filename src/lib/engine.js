@@ -87,7 +87,6 @@ export class LivingEngine {
             this.camZoom += e.deltaY*-0.001*this.camZoomSpeed;
             this.camX += e.deltaY*0.25*this.camZoomSpeed
             this.camY += e.deltaY*0.25*this.camZoomSpeed
-            console.log("sus")
         })
     }
 
