@@ -85,7 +85,11 @@ function ResourceDisplayUI({ctx}){
     let x = engine.canvas.width-width;
     let y = engine.canvas.height-height;
 
-    drawOutlineRect(ctx, x, y, width, height)
+
+    ctx.globalAlpha = 0.4;
+    drawOutlineRect(ctx, x, y, width, height, "#282828")
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = "solid";
     if(IsPointInRect(engine.mouse.x,engine.mouse.y,x,y,x+width,y+height)){
         engine.inUI = true;
     }
