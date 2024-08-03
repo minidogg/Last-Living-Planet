@@ -1,5 +1,4 @@
 let buildings = [];
-
 const addBuilding = (building) => {
   buildings.push(building);
 };

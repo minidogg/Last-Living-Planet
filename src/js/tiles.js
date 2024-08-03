@@ -1,5 +1,5 @@
 import { engine } from "./_main.js";
-import { buildings } from "./buildings/buildings.js";
+import { buildings } from "./buildings/index.js";
 import { tile } from "./buildings/house/index.js";
 import { TileType } from "./tiletype.js";
 
@@ -20,6 +20,8 @@ export const tileTypes = [
         id: "void"
     })
 ].concat(buildings);
+console.log("m", tileTypes)
+
 
 // Load tile images
 function loadTileImages() {
