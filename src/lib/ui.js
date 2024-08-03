@@ -25,7 +25,7 @@ function UIVarUpdater() {
 function IsPointInRect(px, py, rx1, ry1, rx2, ry2) {
     return (
         px >= Math.min(rx1, rx2) &&
-        px <= Math.max(rx1, ry2) &&
+        px <= Math.max(rx1, rx2) &&
         py >= Math.min(ry1, ry2) &&
         py <= Math.max(ry1, ry2)
     );
@@ -44,6 +44,8 @@ let selectedCategory = FilteredCategories[selectedCategoryI];
 export let selectedBuildTile = undefined;
 function TileSelectUI({ ctx }) {
     let hoverTileCategory = -1;
+    let hoverTile = -1;
+
     // Render the category select Ui
     for (let i = 0; i < FilteredCategories.length; i++) {
         let tileCategory = FilteredCategories[i];
@@ -64,7 +66,6 @@ function TileSelectUI({ ctx }) {
     // Tile Pick UI
     let selectedX = 10 + (SquareSize + 10) * selectedCategoryI;
     let selectedY = engine.canvas.height - SquareSize - 10;
-    let hoverTile = -1;
     for (let i = 0; i < selectedCategory.tiles.length; i++) {
         let tileType = selectedCategory.tiles[i];
         let y = selectedY - SquareSize * (i + 1) - 10;
