@@ -1,6 +1,6 @@
 import { setupInputListeners } from './input.js';
 import { handleInput } from './camera.js';
-import { selectTile, PlaceTile, PlaceTileAtSelected, CanPlaceBuilding } from './tiles.js';
+import { selectTile, PlaceTile, PlaceTileAtSelected, CanPlaceTile as CanPlaceTile } from './tiles.js';
 import { LoadSprite } from './utils.js';
 
 export class LivingEngine {
@@ -98,16 +98,16 @@ export class LivingEngine {
         selectTile.call(this, clientX, clientY);
     }
 
-    PlaceBuilding(buildingType, x, y) {
+    PlaceTile(buildingType, x, y) {
         PlaceTile.call(this, buildingType, x, y);
     }
 
-    PlaceBuildingAtSelected(buildingType) {
+    PlaceTileAtSelected(buildingType) {
         PlaceTileAtSelected.call(this, buildingType);
     }
 
-    CanPlaceBuilding(x, y) {
-        return CanPlaceBuilding.call(this, x, y);
+    CanPlaceTile(x, y) {
+        return CanPlaceTile.call(this, x, y);
     }
 
     LoadSprite(url, key = undefined) {

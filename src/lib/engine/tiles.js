@@ -24,29 +24,23 @@ export function selectTile(clientX, clientY) {
 export function PlaceTile(buildingType, x, y) {
     if (x === null || y === null) return;
 
-    if (this.canPlaceBuilding(x, y)) {
-        const building = buildings[buildingType];
-        if (building) {
-            this.tiles[y][x] = {
-                type: buildingType,
-                building: building
-            };
-        }
+    if (this.CanPlaceTile(x, y)) {
+        this.tiles[y][x] = {
+            type: buildingType,
+        };
     }
 }
 
 export function PlaceTileAtSelected(buildingType) {
-    console.log(this)
     const { x, y } = this.selectedTile;
 
-    this.placeBuilding(buildingType, x, y)
+    this.PlaceTile(buildingType, x, y)
 }
 
-export function CanPlaceBuilding(x, y) {
+export function CanPlaceTile(x, y) {
     if (y === 0) return false; // Can't place on the top row
-    if (this.tiles[y][x].type !== 'grass') return false; // Can't place on non-grass tiles
-    if (this.tiles[y - 1][x].type === 'grass' || (x > 0 && this.tiles[y][x - 1].type === 'grass') || (x < this.tiles[0].length - 1 && this.tiles[y][x + 1].type === 'grass')) {
-        return true;
-    }
-    return false;
+    if (this.tiles[y][x].type != 'void') return false; // Can't place on existing building
+    if (this.tiles[y+1][x].type == 'void' && (this.tiles[y][x+1].type == 'void' || this.tiles[y][x-1].type == 'void')) return false; // Can't place on top of nothing without 2 supports.
+ 
+    return true;
 }
