@@ -25,7 +25,7 @@ function UIVarUpdater(){
 function IsPointInRect(px, py, rx1, ry1, rx2, ry2){
     return (
         px >= Math.min(rx1, rx2) &&
-        px <= Math.max(rx1, rx2) &&
+        px <= Math.max(rx1, ry2) &&
         py >= Math.min(ry1, ry2) &&
         py <= Math.max(ry1, ry2)
     )
@@ -37,7 +37,6 @@ function drawOutlineRect(ctx, x, y, width, height, fill = "#282828", outline = "
     ctx.fillStyle = fill
     ctx.fillRect(x, y, width, height)
 }
-
 
 let FilteredCategories = TileTypeCategories.filter(e=>e.visible==true||isDev==true) 
 let selectedCategoryI = 0;
@@ -77,73 +76,90 @@ function TileSelectUI({ctx}){
             hoverTile = i
         }
     }
-    //Tile Hover
+    // Tile Hover
     if(hoverTile!=-1){
         let tileType = selectedCategory.tiles[hoverTile];
 
-        drawOutlineRect(ctx, engine.mouse.x, engine.mouse.y-SquareSize*10, SquareSize*8, SquareSize*10)
+        ctx.font = (SquareSize/2.5)+"px Arial";
+        let nameWidth = ctx.measureText(tileType.name).width;
+        
+        ctx.font = (SquareSize/3)+"px Arial";
+        let descriptionWidth = ctx.measureText(tileType.description).width;
+        
+        let maxWidth = Math.max(nameWidth, descriptionWidth, SquareSize*8);
+        let tooltipHeight = SquareSize*10;
+        
+        if(tileType.cost != undefined){
+            for(let i = 0; i < Object.keys(tileType.cost).length; i++){
+                let id = Object.keys(tileType.cost)[i];
+                let name = resources[id].name + " x" + tileType.cost[id];
+                let costWidth = ctx.measureText(name).width;
+                maxWidth = Math.max(maxWidth, costWidth);
+                tooltipHeight += SquareSize/3;
+            }
+        }
+
+        drawOutlineRect(ctx, engine.mouse.x, engine.mouse.y-tooltipHeight, maxWidth, tooltipHeight);
 
         ctx.fillStyle = "white";
-        let x = engine.mouse.x
-        let y = engine.mouse.y-SquareSize*10+(SquareSize/2.5)
-        let maxWidth = SquareSize*8
+        let x = engine.mouse.x;
+        let y = engine.mouse.y-tooltipHeight+(SquareSize/2.5);
 
-        ctx.font = (SquareSize/2.5)+"px Arial"
-        ctx.fillText(tileType.name, x, y, maxWidth)
+        ctx.font = (SquareSize/2.5)+"px Arial";
+        ctx.fillText(tileType.name, x, y);
 
-        ctx.font = (SquareSize/3)+"px Arial"
-        ctx.fillText(tileType.description, x, y+SquareSize/2.5, maxWidth)
+        ctx.font = (SquareSize/3)+"px Arial";
+        ctx.fillText(tileType.description, x, y+SquareSize/2.5);
 
-        ctx.font = (SquareSize/3)+"px Arial"
-        if(tileType.cost!=undefined){
-            for(let i = 0;i<Object.keys(tileType.cost).length;i++){
-                let id = Object.keys(tileType.cost)[i]
-                let name = resources[id].name
-                let amm = tileType.cost[id]
-
-                ctx.fillText(name+" x"+amm, x, y+(SquareSize/1.2)+(SquareSize/3)*i, maxWidth)
+        if(tileType.cost != undefined){
+            for(let i = 0; i < Object.keys(tileType.cost).length; i++){
+                let id = Object.keys(tileType.cost)[i];
+                let name = resources[id].name + " x" + tileType.cost[id];
+                ctx.fillText(name, x, y+(SquareSize/1.2)+(SquareSize/3)*i);
             }
         }
         
         if(engine.mouse.down==true && engine.mouse.button==0){
-            selectedBuildTile = tileType
+            selectedBuildTile = tileType;
         }
     }
 
     // Render the category tooltips.
     if(hoverTileCategory!=-1){
         engine.inUI = true;
-        let tileCategory = FilteredCategories[hoverTileCategory]
+        let tileCategory = FilteredCategories[hoverTileCategory];
 
-        drawOutlineRect(ctx, engine.mouse.x, engine.mouse.y, SquareSize*4, SquareSize/2)
+        ctx.font = (SquareSize/2.5)+"px Arial";
+        let categoryWidth = ctx.measureText(tileCategory.name).width;
+        let categoryHeight = SquareSize/2;
+
+        drawOutlineRect(ctx, engine.mouse.x, engine.mouse.y, categoryWidth + 20, categoryHeight + 10);
 
         ctx.fillStyle = "white";
-        ctx.font = (SquareSize/2.5)+"px Arial"
-        ctx.fillText(tileCategory.name, engine.mouse.x, engine.mouse.y+SquareSize/2.4, SquareSize*4)
+        ctx.fillText(tileCategory.name, engine.mouse.x + 10, engine.mouse.y + categoryHeight / 1.6);
     }
 }
 
 function ResourceDisplayUI({ctx}){
     let width = SquareSize*4;
-    let height = engine.canvas.height/2.2
+    let height = engine.canvas.height/2.2;
     let x = engine.canvas.width-width;
     let y = engine.canvas.height-height;
 
-
     ctx.globalAlpha = 0.4;
-    drawOutlineRect(ctx, x, y, width, height, "#282828")
+    drawOutlineRect(ctx, x, y, width, height, "#282828");
     ctx.globalAlpha = 1;
     if(IsPointInRect(engine.mouse.x,engine.mouse.y,x,y,x+width,y+height)){
         engine.inUI = true;
     }
 
     for(let i = 0;i<Object.keys(resources).length;i++){
-        let resource = resources[Object.keys(resources)[i]]
+        let resource = resources[Object.keys(resources)[i]];
         let resourceY = y + SquareSize * 0.6 * i + 10;
 
-        drawOutlineRect(ctx, x + 10, resourceY, width - 20, SquareSize * 0.5)
+        drawOutlineRect(ctx, x + 10, resourceY, width - 20, SquareSize * 0.5);
         
-        ctx.drawImage(resource.image, x + 20, resourceY + 5, SquareSize * 0.4, SquareSize * 0.4)
+        ctx.drawImage(resource.image, x + 20, resourceY + 5, SquareSize * 0.4, SquareSize * 0.4);
         ctx.fillStyle = "white";
         ctx.font = (SquareSize / 3) + "px Arial";
         ctx.fillText(resource.name + " x" + resource.value, x + 30 + SquareSize * 0.4, resourceY + SquareSize * 0.35);
