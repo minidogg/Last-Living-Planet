@@ -81,3 +81,20 @@ footer nav a {
 footer nav a:hover {
     text-decoration: underline;
 }
+
+.devlogSection{
+    width:100%;
+    margin:auto;
+    background-color: #5c5c5c;
+    
+    padding: 1em;
+    border-radius: 10px;
+}
+.devlogImg{
+    width: 50%;
+    display:block;
+    margin: auto;
+}
+a{
+    color:white;
+}
