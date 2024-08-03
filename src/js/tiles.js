@@ -15,6 +15,9 @@ export const tileTypes = [
     }),
     new TileType({
         id: "stone"
+    }),
+    new TileType({
+        id: "void"
     })
 ].concat(buildings);
 

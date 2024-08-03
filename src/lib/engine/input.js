@@ -1,3 +1,5 @@
+import { selectedBuildTile } from "../ui.js";
+
 export function setupInputListeners() {
     this.canvas.addEventListener('mousedown', (e) => {
         this.updateMouse(e)
@@ -9,6 +11,10 @@ export function setupInputListeners() {
             this.lastMouseY = e.clientY;
         } else if (e.button === 0) { // Left mouse button
             this.selectTile(e.clientX, e.clientY);
+            console.log(selectedBuildTile)
+            if(selectedBuildTile!=undefined){
+                this.PlaceTileAtSelected(selectedBuildTile.id)
+            }
         }
     });
 

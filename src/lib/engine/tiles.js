@@ -1,3 +1,5 @@
+import { buildings } from "../../js/buildings/buildings.js";
+
 export function selectTile(clientX, clientY) {
     const rect = this.canvas.getBoundingClientRect();
     const canvasX = clientX - rect.left;
@@ -19,7 +21,7 @@ export function selectTile(clientX, clientY) {
     console.log(`Selected tile: (${this.selectedTile.x}, ${this.selectedTile.y})`);
 }
 
-export function placeBuilding(buildingType, x, y) {
+export function PlaceTile(buildingType, x, y) {
     if (x === null || y === null) return;
 
     if (this.canPlaceBuilding(x, y)) {
@@ -33,13 +35,14 @@ export function placeBuilding(buildingType, x, y) {
     }
 }
 
-export function placeBuildingAtSelected(buildingType) {
+export function PlaceTileAtSelected(buildingType) {
+    console.log(this)
     const { x, y } = this.selectedTile;
 
     this.placeBuilding(buildingType, x, y)
 }
 
-export function canPlaceBuilding(x, y) {
+export function CanPlaceBuilding(x, y) {
     if (y === 0) return false; // Can't place on the top row
     if (this.tiles[y][x].type !== 'grass') return false; // Can't place on non-grass tiles
     if (this.tiles[y - 1][x].type === 'grass' || (x > 0 && this.tiles[y][x - 1].type === 'grass') || (x < this.tiles[0].length - 1 && this.tiles[y][x + 1].type === 'grass')) {

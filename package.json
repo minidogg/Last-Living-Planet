@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon app.js",
     "lint": "npx eslint --fix .",
-    "httpserver": "http-server -c-1 -p 3000"
+    "httpserver": "cd src && http-server -c-1 -p 3000"
   },
   "keywords": [],
   "author": "",

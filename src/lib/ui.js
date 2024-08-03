@@ -42,6 +42,7 @@ function drawOutlineRect(ctx, x, y, width, height, fill = "#282828", outline = "
 let FilteredCategories = TileTypeCategories.filter(e=>e.visible==true||isDev==true) 
 let selectedCategoryI = 0;
 let selectedCategory = FilteredCategories[selectedCategoryI]
+export let selectedBuildTile = undefined;
 function TileSelectUI({ctx}){
     let hoverTileCategory = -1;
     // Render the category select Ui
@@ -61,7 +62,7 @@ function TileSelectUI({ctx}){
         }
     }
 
-    // TODO: Render the tiles from the selected category.
+    // Tile Pick UI
     let selectedX = 10+(SquareSize+10)*selectedCategoryI;
     let selectedY = engine.canvas.height-SquareSize-10  
     let hoverTile = -1;
@@ -74,17 +75,39 @@ function TileSelectUI({ctx}){
         if(IsPointInRect(engine.mouse.x, engine.mouse.y, selectedX, y, selectedX+SquareSize, y+SquareSize)){
             engine.inUI = true;
             hoverTile = i
-            console.log(i)
         }
     }
+    //Tile Hover
     if(hoverTile!=-1){
         let tileType = selectedCategory.tiles[hoverTile];
 
         drawOutlineRect(ctx, engine.mouse.x, engine.mouse.y-SquareSize*10, SquareSize*8, SquareSize*10)
 
         ctx.fillStyle = "white";
+        let x = engine.mouse.x
+        let y = engine.mouse.y-SquareSize*10+(SquareSize/2.5)
+        let maxWidth = SquareSize*8
+
         ctx.font = (SquareSize/2.5)+"px Arial"
-        ctx.fillText(tileType.name, engine.mouse.x, engine.mouse.y-SquareSize*10+(SquareSize/2.5), SquareSize*8)
+        ctx.fillText(tileType.name, x, y, maxWidth)
+
+        ctx.font = (SquareSize/3)+"px Arial"
+        ctx.fillText(tileType.description, x, y+SquareSize/2.5, maxWidth)
+
+        ctx.font = (SquareSize/3)+"px Arial"
+        if(tileType.cost!=undefined){
+            for(let i = 0;i<Object.keys(tileType.cost).length;i++){
+                let id = Object.keys(tileType.cost)[i]
+                let name = resources[id].name
+                let amm = tileType.cost[id]
+
+                ctx.fillText(name+" x"+amm, x, y+(SquareSize/1.2)+(SquareSize/3)*i, maxWidth)
+            }
+        }
+        
+        if(engine.mouse.down==true && engine.mouse.button==0){
+            selectedBuildTile = tileType
+        }
     }
 
     // Render the category tooltips.

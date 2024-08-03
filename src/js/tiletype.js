@@ -34,11 +34,13 @@ export class TileType {
         name = id,
         description = name,
         category = "none",
-        tickFunc = undefined
+        tickFunc = undefined,
+        cost = {}
     }) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.cost = cost;
 
         this.tickFunc = tickFunc;
 
