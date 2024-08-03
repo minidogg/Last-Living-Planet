@@ -20,7 +20,6 @@ export const tileTypes = [
         id: "void"
     })
 ].concat(buildings);
-console.log("m", tileTypes)
 
 
 // Load tile images
