@@ -4,3 +4,4 @@ import { buildings, addBuilding } from './buildings.js';
 addBuilding(house);
 
 export { buildings };
+ 

@@ -145,3 +145,15 @@ export function PositionCameraAtHome() {
     engine.camY = (homePos.y - 15) * tileZoomedSize;
 
 }
+
+export function TickTiles(){
+    for (let i1 = startY; i1 < endY; i1++) {
+        for (let i2 = startX; i2 < endX; i2++) {
+            let tile = tiles[i1][i2];
+            if(tile.type=="void")continue;
+            let tileType = tileTypes.find(e=>e.tickFunc);
+            if(tileType.tickFunc==undefined)continue;
+            console.log("m")
+        }
+    }
+}
