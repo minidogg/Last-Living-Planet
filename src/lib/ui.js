@@ -4,26 +4,36 @@ import { TileTypeCategories } from '../js/tiletype.js';
 import { isDev } from './utils.js';
 import { resources } from '../js/resources.js';
 
+// Set the default font
 export const defaultFont = "Pixel"
 
+// Init the image variable used for UI Boxes.
 let UIBack;
+
+// Load things in that are needed for UI rendering.
 export function StartUIRender() {
+    // Load the sprite UIBack sprite into the UIBack variable.
     UIBack = engine.LoadSprite(`../assets/img/uiback.png`);
 
+    // Push the UI rendering functions into the render loop
     engine.onRender.push(UIVarUpdater); // This should always be first.
     engine.onRender.push(TileSelectUI);
     engine.onRender.push(ResourceDisplayUI);
 }
 
+// Init variables used for proportional scaling in the UI.
 let SquareSize = 0;
 let SquareSizeInner = 0;
 function UIVarUpdater() {
+    // Update the variables used for proportional UI scaling.
     SquareSize = (window.innerWidth + window.innerHeight) / 2 * 0.05;
     SquareSizeInner = SquareSize * 0.75;
+
+    // Reset the inUI variable.
     engine.inUI = false;
 }
 
-// Is Point
+// Check if a point is in a rectangle.
 function IsPointInRect(px, py, rx1, ry1, rx2, ry2) {
     return (
         px >= Math.min(rx1, rx2) &&
@@ -33,6 +43,7 @@ function IsPointInRect(px, py, rx1, ry1, rx2, ry2) {
     );
 }
 
+// Draw an outlined rectangle.
 function drawOutlineRect(ctx, x, y, width, height, fill = "#282828", outline = "#8a8a8a", outlineWidth = 2) {
     ctx.fillStyle = outline;
     ctx.fillRect(x - outlineWidth, y - outlineWidth, width + outlineWidth * 2, height + outlineWidth * 2);
@@ -40,6 +51,7 @@ function drawOutlineRect(ctx, x, y, width, height, fill = "#282828", outline = "
     ctx.fillRect(x, y, width, height);
 }
 
+// TODO: Make this code more readable and understandable.
 let FilteredCategories = TileTypeCategories.filter(e => e.visible == true || isDev == true);
 let selectedCategoryI = 0;
 let selectedCategory = FilteredCategories[selectedCategoryI];
