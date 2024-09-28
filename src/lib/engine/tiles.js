@@ -24,7 +24,7 @@ export function selectTile(clientX, clientY) {
 }
 
 export function PlaceTile(tileType, x, y) {
-    if (x === null || y === null) return;
+    if (x === null || y === null) return false;
 
     if (this.CanPlaceTile(x, y)) {
         this.tiles[y][x] = {
@@ -37,8 +37,8 @@ export function PlaceTile(tileType, x, y) {
 
 export function PlaceTileAtSelected(tileType, spendResources = true) {
     const { x, y } = this.selectedTile;
+    let tile = tileTypes.find(e=>e.id==tileType)
     if(spendResources){
-        let tile = tileTypes.find(e=>e.id==tileType)
         let canAfford = true;
 
         Object.keys(tile.cost).forEach(e=>{
@@ -53,13 +53,15 @@ export function PlaceTileAtSelected(tileType, spendResources = true) {
 
     }
 
-    let success = this.PlaceTile(tileType, x, y)
+    let success = this.PlaceTile(tileType, x, y);
+    console.log(success)
     if(success==true&&spendResources==true){
         Object.keys(tile.cost).forEach(e=>{
             resources[e].value -= tile.cost[e]
         })
     }
-    return success;
+
+    return true;
 }
 
 export function CanPlaceTile(x, y) {

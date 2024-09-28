@@ -96,15 +96,15 @@ export class LivingEngine {
     }
 
     selectTile(clientX, clientY) {
-        selectTile.call(this, clientX, clientY);
+        return selectTile.call(this, clientX, clientY);
     }
 
     PlaceTile(buildingType, x, y) {
-        PlaceTile.call(this, buildingType, x, y);
+        return PlaceTile.call(this, buildingType, x, y);
     }
 
     PlaceTileAtSelected(buildingType) {
-        PlaceTileAtSelected.call(this, buildingType);
+        return PlaceTileAtSelected.call(this, buildingType);
     }
 
     CanPlaceTile(x, y) {
