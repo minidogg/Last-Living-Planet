@@ -84,10 +84,10 @@ function TileSelectUI({ ctx }) {
     if (hoverTile != -1) {
         let tileType = selectedCategory.tiles[hoverTile];
 
-        ctx.font = (SquareSize / 2.5) + "px Arial";
+        ctx.font = (SquareSize / 2.5) + `px ${defaultFont}`;
         let nameWidth = ctx.measureText(tileType.name).width;
 
-        ctx.font = (SquareSize / 3) + "px Arial";
+        ctx.font = (SquareSize / 3) + `px ${defaultFont}`;
         let descriptionWidth = ctx.measureText(tileType.description).width;
 
         let maxWidth = Math.max(nameWidth, descriptionWidth);
@@ -109,10 +109,10 @@ function TileSelectUI({ ctx }) {
         let x = engine.mouse.x + 10;
         let y = engine.mouse.y - tooltipHeight + (SquareSize / 2.5);
 
-        ctx.font = (SquareSize / 2.5) + "px Arial";
+        ctx.font = (SquareSize / 2.5) + `px ${defaultFont}`;
         ctx.fillText(tileType.name, x, y);
 
-        ctx.font = (SquareSize / 3) + "px Arial";
+        ctx.font = (SquareSize / 3) + `px ${defaultFont}`;
         ctx.fillText(tileType.description, x, y + SquareSize / 2.5);
 
         if (tileType.cost != undefined) {
@@ -133,7 +133,7 @@ function TileSelectUI({ ctx }) {
         engine.inUI = true;
         let tileCategory = FilteredCategories[hoverTileCategory];
 
-        ctx.font = (SquareSize / 2.5) + "px Arial";
+        ctx.font = (SquareSize / 2.5) + `px ${defaultFont}`;
         let categoryWidth = ctx.measureText(tileCategory.name).width;
         let categoryHeight = SquareSize / 2.5;
 
@@ -165,7 +165,7 @@ function ResourceDisplayUI({ ctx }) {
 
         ctx.drawImage(resource.image, x + 20, resourceY + 5, SquareSize * 0.4, SquareSize * 0.4);
         ctx.fillStyle = "white";
-        ctx.font = (SquareSize / 3) + "px Arial";
+        ctx.font = (SquareSize / 3) + `px ${defaultFont}`;
         ctx.fillText(resource.name + " x" + resource.value, x + 30 + SquareSize * 0.4, resourceY + SquareSize * 0.35);
     }
 
