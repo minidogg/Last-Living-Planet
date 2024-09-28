@@ -55,6 +55,7 @@ export class LivingEngine {
     Render() {
         const start = Date.now();
 
+        this.ctx.imageSmoothingEnabled = false;
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         handleInput.call(this);
         this.onRender.forEach((renderFunction) => {
