@@ -4,7 +4,7 @@ import { TileTypeCategories } from '../js/tiletype.js';
 import { isDev } from './utils.js';
 import { resources } from '../js/resources.js';
 
-export const defaultFont = "Pixeled"
+export const defaultFont = "Pixel"
 
 let UIBack;
 export function StartUIRender() {
