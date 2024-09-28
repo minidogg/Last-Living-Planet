@@ -19,6 +19,7 @@ export function StartUIRender() {
 
     // Push the UI rendering functions into the render loop
     engine.onRender.push(UIVarUpdater); // This should always be first.
+    engine.onRender.push(MenuUI);
     engine.onRender.push(TileSelectUI);
     engine.onRender.push(ResourceDisplayUI);
 }
@@ -184,5 +185,9 @@ function ResourceDisplayUI({ ctx }) {
         ctx.font = (SquareSize / 3) + `px ${defaultFont}`;
         ctx.fillText(resource.name + " x" + resource.value, x + 30 + SquareSize * 0.4, resourceY + SquareSize * 0.35);
     }
+
+}
+
+function MenuUI({ ctx, canvas }){
 
 }

@@ -59,10 +59,12 @@ export class LivingEngine {
         this.ctx.imageSmoothingEnabled = false;
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         handleInput.call(this);
+        let renderContextObject = {
+            ctx: this.ctx,
+            canvas: this.canvas
+        }
         this.onRender.forEach((renderFunction) => {
-            renderFunction({
-                ctx: this.ctx
-            });
+            renderFunction(renderContextObject);
         });
 
         const end = Date.now();
