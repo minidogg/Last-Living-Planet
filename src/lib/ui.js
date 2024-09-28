@@ -59,6 +59,7 @@ let selectedCategoryI = 0;
 let selectedCategory = FilteredCategories[selectedCategoryI];
 export let selectedBuildTile = undefined;
 function TileSelectUI({ ctx }) {
+    if(engine.inMenu)return;
     let hoverTileCategory = -1;
     let hoverTile = -1;
 
@@ -159,6 +160,7 @@ function TileSelectUI({ ctx }) {
 }
 
 function ResourceDisplayUI({ ctx }) {
+    if(engine.inMenu)return;
     let width = SquareSize * 4;
     let height = engine.canvas.height / 2.2;
     let x = engine.canvas.width - width;

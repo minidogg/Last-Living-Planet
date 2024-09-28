@@ -1,5 +1,5 @@
 export function handleInput() {
-    if(this.inUI == true) return;
+    if(this.inUI == true|| this.inMenu==true) return;
 
     // Normalize the keysPressed keys to lowercase
     const normalizedKeys = Object.keys(this.keysPressed).reduce((acc, key) => {

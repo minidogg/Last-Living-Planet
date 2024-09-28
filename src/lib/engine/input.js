@@ -4,7 +4,7 @@ export function setupInputListeners() {
     this.canvas.addEventListener('mousedown', (e) => {
         this.updateMouse(e)
 
-        if(this.inUI == true) return;
+        if(this.inUI == true||this.inMenu == true) return;
         if (e.button === 2) { // Right mouse button
             this.isDragging = true;
             this.lastMouseX = e.clientX;
