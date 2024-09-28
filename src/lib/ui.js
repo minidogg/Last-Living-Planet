@@ -166,4 +166,5 @@ function ResourceDisplayUI({ ctx }) {
         ctx.font = (SquareSize / 3) + "px Arial";
         ctx.fillText(resource.name + " x" + resource.value, x + 30 + SquareSize * 0.4, resourceY + SquareSize * 0.35);
     }
+
 }

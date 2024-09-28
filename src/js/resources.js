@@ -28,5 +28,5 @@ resources["stone"] = new Resource({
     id: "stone",
     name: "Stone",
     description: "It's stone. Cavemen liked throwing this at stuff.",
-    startingValue: 0
+    startingValue: 4
 })

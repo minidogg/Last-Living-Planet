@@ -1,4 +1,6 @@
 import { buildings } from "../../js/buildings/buildings.js";
+import { resources } from "../../js/resources.js";
+import { tileTypes  } from "../../js/tiles.js";
 
 export function selectTile(clientX, clientY) {
     const rect = this.canvas.getBoundingClientRect();
@@ -21,20 +23,39 @@ export function selectTile(clientX, clientY) {
     console.log(`Selected tile: (${this.selectedTile.x}, ${this.selectedTile.y})`);
 }
 
-export function PlaceTile(buildingType, x, y) {
+export function PlaceTile(tileType, x, y) {
     if (x === null || y === null) return;
 
     if (this.CanPlaceTile(x, y)) {
         this.tiles[y][x] = {
-            type: buildingType,
+            type: tileType,
         };
     }
 }
 
-export function PlaceTileAtSelected(buildingType) {
+export function PlaceTileAtSelected(tileType, spendResources = true) {
     const { x, y } = this.selectedTile;
+    if(spendResources){
+        let tile = tileTypes.find(e=>e.id==tileType)
+        let canAfford = true;
 
-    this.PlaceTile(buildingType, x, y)
+        Object.keys(tile.cost).forEach(e=>{
+            if(canAfford==false)return;
+            if(resources[e].value<tile.cost[e])canAfford = false;
+        })
+
+        if(canAfford==false){
+            return;
+        }
+
+        Object.keys(tile.cost).forEach(e=>{
+            console.log(e)
+            resources[e].value -= tile.cost[e]
+        })
+    }
+
+    this.PlaceTile(tileType, x, y)
+    return true;
 }
 
 export function CanPlaceTile(x, y) {
