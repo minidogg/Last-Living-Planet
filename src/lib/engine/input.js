@@ -43,7 +43,9 @@ export function setupInputListeners() {
     });
 
     window.addEventListener('keydown', (e) => {
+        e.preventDefault()
         this.keysPressed[e.key] = true;
+        if(this.keysPressed["Tab"]==true)this.inMenu = !this.inMenu;
     });
 
     window.addEventListener('keyup', (e) => {
