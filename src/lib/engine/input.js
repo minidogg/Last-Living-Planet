@@ -43,7 +43,6 @@ export function setupInputListeners() {
     });
 
     window.addEventListener('keydown', (e) => {
-        e.preventDefault()
         this.keysPressed[e.key] = true;
         if(this.keysPressed["Tab"]==true)this.inMenu = !this.inMenu;
     });
@@ -53,7 +52,8 @@ export function setupInputListeners() {
     });
 
     window.addEventListener("wheel", (e) => {
-        if(this.inUI == true) return;
+        // TODO: Add a way to get scroll amount from the "this.mouse" object
+        if(this.inUI == true||this.inMenu == true) return;
 
         const mouseX = this.mouse.x;
         const mouseY = this.mouse.y;
