@@ -4,6 +4,8 @@ import { TileTypeCategories } from '../js/tiletype.js';
 import { isDev } from './utils.js';
 import { resources } from '../js/resources.js';
 
+export const defaultFont = "Pixeled"
+
 let UIBack;
 export function StartUIRender() {
     UIBack = engine.LoadSprite(`../assets/img/uiback.png`);
