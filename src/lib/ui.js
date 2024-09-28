@@ -4,6 +4,8 @@ import { TileTypeCategories } from '../js/tiletype.js';
 import { isDev } from './utils.js';
 import { resources } from '../js/resources.js';
 
+// TODO: Split this up into different files just like engine.js
+
 // Set the default font
 export const defaultFont = "Pixel"
 
