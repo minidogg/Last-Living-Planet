@@ -34,7 +34,7 @@ export class LivingEngine {
         this.lastMouseY = 0;
 
         this.inUI = false;
-        this.inMenu = true;
+        this.inMenu = false;
 
         this.keysPressed = {};
 

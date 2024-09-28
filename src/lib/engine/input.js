@@ -2,7 +2,7 @@ import { selectedBuildTile } from "../ui.js";
 
 export function setupInputListeners() {
     this.canvas.addEventListener('mousedown', (e) => {
-        this.updateMouse(e)
+        this.updateMouse(e, e.button)
 
         if(this.inUI == true||this.inMenu == true) return;
         if (e.button === 2) { // Right mouse button
@@ -22,14 +22,14 @@ export function setupInputListeners() {
 
         if(this.inUI == true) return;
         if (this.isDragging) {
-            const dx = e.clientX - this.lastMouseX;
-            const dy = e.clientY - this.lastMouseY;
+            const dx = this.mouse.x - this.lastMouseX;
+            const dy = this.mouse.y - this.lastMouseY;
 
             this.camX += dx;
             this.camY += dy;
 
-            this.lastMouseX = e.clientX;
-            this.lastMouseY = e.clientY;
+            this.lastMouseX = this.mouse.x;
+            this.lastMouseY = this.mouse.y;
         }
     });
 
