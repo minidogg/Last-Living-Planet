@@ -189,5 +189,17 @@ function ResourceDisplayUI({ ctx }) {
 }
 
 function MenuUI({ ctx, canvas }){
+    if(engine.inMenu==false)return;
+    let x = canvas.width/4
+    let y = SquareSize
+    let w = canvas.width/2
+    let h =  canvas.height-SquareSize*2
 
+    ctx.globalAlpha = 0.4;
+    drawOutlineRect(ctx, x, y, w, h);
+    ctx.globalAlpha = 1;
+
+    ctx.fillStyle = "white";
+    ctx.font = (SquareSizeInner) + `px ${defaultFont}`;
+    ctx.fillText("Main Menu", x+w/3, y+SquareSizeInner, w);
 }
