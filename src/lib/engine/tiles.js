@@ -30,7 +30,9 @@ export function PlaceTile(tileType, x, y) {
         this.tiles[y][x] = {
             type: tileType,
         };
+        return true;
     }
+    return false;
 }
 
 export function PlaceTileAtSelected(tileType, spendResources = true) {
@@ -48,14 +50,16 @@ export function PlaceTileAtSelected(tileType, spendResources = true) {
             return;
         }
 
+
+    }
+
+    let success = this.PlaceTile(tileType, x, y)
+    if(success==true&&spendResources==true){
         Object.keys(tile.cost).forEach(e=>{
-            console.log(e)
             resources[e].value -= tile.cost[e]
         })
     }
-
-    this.PlaceTile(tileType, x, y)
-    return true;
+    return success;
 }
 
 export function CanPlaceTile(x, y) {
