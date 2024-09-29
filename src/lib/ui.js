@@ -202,6 +202,12 @@ function DrawButton(ctx, text, x, y, w, h, transparency = -1){
     ctx.fillStyle = "white";
     ctx.font = (SquareSizeInner) + `px ${defaultFont}`;
     ctx.fillText(text, x+w/2-text.length*SquareSizeInner/4, y+SquareSizeInner/1.25, w);
+
+    if(IsPointInRect(engine.mouse.x, engine.mouse.y, x, y, x + w, y + h)){
+        engine.canvas.style.cursor = "pointer";
+        return true;
+    }
+    return false;
 }
 
 function MenuUI({ ctx, canvas }){
