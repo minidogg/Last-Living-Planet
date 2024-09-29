@@ -194,14 +194,18 @@ function ResourceDisplayUI({ ctx }) {
 
 }
 
+function drawTextCentered(ctx, text, x, y, w, h, fontSize){
+    ctx.fillStyle = "white";
+    ctx.font = (fontSize) + `px ${defaultFont}`;
+    ctx.fillText(text, x+w/2-text.length*fontSize/4, y+fontSize/1.25, w);
+}
+
 function DrawButton(ctx, text, x, y, w, h, transparency = -1){
     if(transparency!=-1) ctx.globalAlpha = transparency;
     drawOutlineRect(ctx, x, y, w, h);
     if(transparency!=-1) ctx.globalAlpha = 1;
 
-    ctx.fillStyle = "white";
-    ctx.font = (SquareSizeInner) + `px ${defaultFont}`;
-    ctx.fillText(text, x+w/2-text.length*SquareSizeInner/4, y+SquareSizeInner/1.25, w);
+    drawTextCentered(ctx, text, x, y, w, h, SquareSizeInner)
 
     if(IsPointInRect(engine.mouse.x, engine.mouse.y, x, y, x + w, y + h)){
         engine.inUI = true;
@@ -222,9 +226,8 @@ function MenuUI({ ctx, canvas }){
     drawOutlineRect(ctx, x, y, w, h);
     ctx.globalAlpha = 1;
 
-    ctx.fillStyle = "white";
-    ctx.font = (SquareSizeInner) + `px ${defaultFont}`;
-    ctx.fillText("Main Menu", x+w/3, y+SquareSizeInner, w);
+    drawTextCentered(ctx, "Last Living Planet", x, y, w, h, SquareSizeInner)
+
 
     if( DrawButton(ctx, "Play", x, y+SquareSizeInner*2, w, SquareSizeInner, 0.4) ){
         engine.inMenu = false;
