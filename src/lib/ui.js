@@ -34,6 +34,9 @@ function UIVarUpdater() {
 
     // Reset the inUI variable.
     engine.inUI = false;
+
+    // Make cursor look normal
+    engine.canvas.style.cursor = "initial"
 }
 
 // Check if a point is in a rectangle.
@@ -75,6 +78,7 @@ function TileSelectUI({ ctx }) {
         ctx.drawImage(tileCategory.image, x + SquareSize / 8.5, y + SquareSize / 8.5, SquareSizeInner, SquareSizeInner);
 
         if (IsPointInRect(engine.mouse.x, engine.mouse.y, x, y, x + SquareSize, y + SquareSize)) {
+            engine.canvas.style.cursor = "pointer";
             selectedCategoryI = i;
             selectedCategory = FilteredCategories[selectedCategoryI];
             hoverTileCategory = i;
@@ -93,6 +97,7 @@ function TileSelectUI({ ctx }) {
         if (IsPointInRect(engine.mouse.x, engine.mouse.y, selectedX, y, selectedX + SquareSize, y + SquareSize)) {
             engine.inUI = true;
             hoverTile = i;
+            engine.canvas.style.cursor = "pointer";
         }
     }
 
@@ -171,6 +176,7 @@ function ResourceDisplayUI({ ctx }) {
     drawOutlineRect(ctx, x, y, width, height, "#282828");
     ctx.globalAlpha = 1;
     if (IsPointInRect(engine.mouse.x, engine.mouse.y, x, y, x + width, y + height)) {
+        engine.canvas.style.cursor = "pointer";
         engine.inUI = true;
     }
 
@@ -188,6 +194,16 @@ function ResourceDisplayUI({ ctx }) {
 
 }
 
+function DrawButton(ctx, text, x, y, w, h, transparency = -1){
+    if(transparency!=-1) ctx.globalAlpha = transparency;
+    drawOutlineRect(ctx, x, y, w, h);
+    if(transparency!=-1) ctx.globalAlpha = 1;
+
+    ctx.fillStyle = "white";
+    ctx.font = (SquareSizeInner) + `px ${defaultFont}`;
+    ctx.fillText(text, x+w/2-text.length*SquareSizeInner/4, y+SquareSizeInner/1.25, w);
+}
+
 function MenuUI({ ctx, canvas }){
     if(engine.inMenu==false)return;
     let x = canvas.width/4
@@ -202,4 +218,7 @@ function MenuUI({ ctx, canvas }){
     ctx.fillStyle = "white";
     ctx.font = (SquareSizeInner) + `px ${defaultFont}`;
     ctx.fillText("Main Menu", x+w/3, y+SquareSizeInner, w);
+
+    DrawButton(ctx, "Play", x, y+SquareSizeInner*2, w, SquareSizeInner, 0.4)
+
 }
