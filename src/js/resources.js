@@ -30,3 +30,5 @@ resources["stone"] = new Resource({
     description: "It's stone. Cavemen liked throwing this at stuff.",
     startingValue: 4
 })
+
+if(localStorage.getItem("dev")=="dev")Object.keys(resources).forEach(e=>resources[e].value = 9999)
