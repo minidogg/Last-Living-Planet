@@ -204,8 +204,9 @@ function DrawButton(ctx, text, x, y, w, h, transparency = -1){
     ctx.fillText(text, x+w/2-text.length*SquareSizeInner/4, y+SquareSizeInner/1.25, w);
 
     if(IsPointInRect(engine.mouse.x, engine.mouse.y, x, y, x + w, y + h)){
+        engine.inUI = true;
         engine.canvas.style.cursor = "pointer";
-        return true;
+        if(engine.mouse.down) return true;
     }
     return false;
 }
@@ -225,6 +226,8 @@ function MenuUI({ ctx, canvas }){
     ctx.font = (SquareSizeInner) + `px ${defaultFont}`;
     ctx.fillText("Main Menu", x+w/3, y+SquareSizeInner, w);
 
-    DrawButton(ctx, "Play", x, y+SquareSizeInner*2, w, SquareSizeInner, 0.4)
+    if( DrawButton(ctx, "Play", x, y+SquareSizeInner*2, w, SquareSizeInner, 0.4) ){
+        engine.inMenu = false;
+    }
 
 }
