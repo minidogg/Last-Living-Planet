@@ -14,7 +14,7 @@ export function BackgroundRender({ctx}){
     ctx.drawImage(backgroundImg, 0, -100, backgroundImg.width*1.8, backgroundImg.height*1.8)
     ctx.drawImage(backgroundImg, backgroundImg.width*1.8, -100, backgroundImg.width*1.8, backgroundImg.height*1.8)
 
-    let rot = 50 * Math.PI / 180
+    // let rot = 50 * Math.PI / 180
     // ctx.rotate(rot)
     ctx.globalAlpha = 0.8;
     ctx.drawImage(saturnImg, 0+engine.camX, 0+engine.camY, saturnImg.width*engine.camZoom, saturnImg.height*engine.camZoom)
